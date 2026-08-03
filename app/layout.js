@@ -2,33 +2,60 @@ import "./globals.css";
 import "./components.css";
 
 export const metadata = {
-  title: "Dune Moon · Synthwave / Synthpop",
+  metadataBase: new URL("https://dune-moon.vercel.app"),
+  title: {
+    default: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
+    template: "%s · Dune Moon",
+  },
   description:
-    "DUNE MOON es un proyecto electrónico de género WAVE / SYNTHWAVE desde Riobamba, Ecuador. Música ochentera con un toque actual. Escucha en Spotify y mira los videos en YouTube.",
+    "Dune Moon es el proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador. Música ochentera con un toque actual: álbum Tiempo, sencillos y EPs en Spotify. Escucha, mira los videos y sigue el estreno del nuevo single.",
   keywords: [
     "Dune Moon",
-    "synthwave",
-    "synthpop",
-    "wave",
+    "Synthpop",
+    "Synthwave",
     "música electrónica",
     "Ecuador",
     "Riobamba",
+    "Luis Alejandro Veloz Vera",
+    "Alejandro Veloz",
+    "wave",
     "80s",
+    "retrowave",
+    "música ochentera",
+    "álbum Tiempo",
+    "En Mi Mente",
   ],
+  authors: [{ name: "Luis Alejandro Veloz Vera", url: "https://dune-moon.vercel.app" }],
+  creator: "Dune Moon",
+  publisher: "Dune Moon",
+  category: "Música",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Dune Moon · Synthwave / Synthpop",
+    title: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
     description:
-      "Proyecto electrónico de género WAVE / SYNTHWAVE desde Riobamba, Ecuador.",
+      "Proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador. Música ochentera con un toque actual. Escucha en Spotify y mira los videos en YouTube.",
     type: "website",
     siteName: "Dune Moon",
+    locale: "es_EC",
+    url: "https://dune-moon.vercel.app",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dune Moon · Synthwave / Synthpop",
+    title: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
     description:
-      "Proyecto electrónico de género WAVE / SYNTHWAVE desde Riobamba, Ecuador.",
+      "Proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador.",
+    images: ["/og-image.png"],
   },
-  metadataBase: new URL("https://dune-moon.vercel.app"),
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -38,12 +65,81 @@ export const metadata = {
     ],
     apple: { url: "/favicon-256.png", sizes: "180x180", type: "image/png" },
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export const viewport = {
+  themeColor: "#060a14",
+  width: "device-width",
+  initialScale: 1,
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  name: "Dune Moon",
+  alternateName: "DUNE MOON",
+  genre: ["Synthpop", "Synthwave"],
+  foundingLocation: {
+    "@type": "Place",
+    name: "Riobamba, Ecuador",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Riobamba",
+      addressRegion: "Chimborazo",
+      addressCountry: "EC",
+    },
+  },
+  foundingDate: "2015",
+  member: {
+    "@type": "Person",
+    name: "Luis Alejandro Veloz Vera",
+    givenName: "Alejandro",
+    familyName: "Veloz Vera",
+    jobTitle: "Compositor, productor y director artístico",
+  },
+  url: "https://dune-moon.vercel.app",
+  sameAs: [
+    "https://open.spotify.com/artist/1FTaP61WmZlwN4mGyuYGmG",
+    "https://www.youtube.com/@dunemoonmusic",
+    "https://www.instagram.com/dunemoonmusic/",
+    "https://www.facebook.com/DUNEMUSIC",
+    "https://soundcloud.com/dune-13",
+    "https://music.apple.com/us/artist/dune-moon/1359677479",
+    "https://www.deezer.com/us/artist/14344935",
+  ],
+  album: [
+    {
+      "@type": "MusicAlbum",
+      name: "Tiempo",
+      datePublished: "2019",
+      numberOfTracks: 12,
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body>
+        <a href="#musica" className="skip-link">
+          Saltar al contenido
+        </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

@@ -6,12 +6,13 @@ import Starfield from "./Starfield";
 const RELEASE_DATE = new Date("2026-08-15T00:00:00");
 
 function useCountdown() {
-  const [now, setNow] = useState(() => Date.now());
+  const [now, setNow] = useState(null);
   useEffect(() => {
+    setNow(Date.now());
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
   }, []);
-  const diff = Math.max(0, RELEASE_DATE.getTime() - now);
+  const diff = Math.max(0, RELEASE_DATE.getTime() - (now ?? RELEASE_DATE.getTime()));
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
   const minutes = Math.floor((diff % 3600000) / 60000);
@@ -32,7 +33,12 @@ function ReleaseSlide() {
   const { released, units } = useCountdown();
 
   return (
-    <div className="hero__slide">
+    <div className="hero__slide hero__slide--release">
+      <div
+        className="hero__release-bg"
+        aria-hidden="true"
+        style={{ backgroundImage: "url(/en-mi-mente-2026-remaster.jpg)" }}
+      />
       <p className="eyebrow hero__eyebrow">Nuevo lanzamiento · 2026</p>
 
       <div className="hero__release">
@@ -129,6 +135,7 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setInterval(() => setSlide((s) => (s + 1) % 2), 7000);
     return () => clearInterval(t);
   }, []);

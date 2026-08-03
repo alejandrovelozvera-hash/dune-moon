@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Reveal from "./Reveal";
 import Equalizer from "./Equalizer";
 import { ARTIST_ID, DISCOGRAPHY, SOCIALS } from "@/lib/data";
@@ -20,14 +23,42 @@ function Embed({ id, name, height = 352 }) {
 }
 
 function ReleaseCard({ item, index }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <Reveal delay={(index % 4) + 1} className="release">
-      <div className="release__embed panel">
-        <Embed id={item.id} name={item.name} />
-      </div>
-      <div className="release__meta">
-        <h3>{item.name}</h3>
-        <span>{item.year}</span>
+      <div className={`release__tile${open ? " is-open" : ""}`}>
+        <button
+          className="release__card"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={`${open ? "Cerrar" : "Abrir"} reproductor de ${item.name}`}
+        >
+          <span className="release__cover">
+            <img
+              src={`/covers/${item.id}.jpg`}
+              alt={`Portada de ${item.name}`}
+              width="300"
+              height="300"
+              loading="lazy"
+            />
+            <span className="release__play">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.14v14l11-7-11-7Z" />
+              </svg>
+            </span>
+          </span>
+          <span className="release__card-info">
+            <span className="release__name">{item.name}</span>
+            <span className="release__year">{item.year}</span>
+          </span>
+        </button>
+
+        {open && (
+          <div className="release__expand">
+            <Embed id={item.id} name={item.name} height={352} />
+          </div>
+        )}
       </div>
     </Reveal>
   );
@@ -46,8 +77,8 @@ export default function Music() {
             <Equalizer />
           </h2>
           <p className="section-sub">
-            Álbum, sencillos y EPs de Dune Moon, reproducibles desde Spotify sin
-            salir de esta página.
+            Álbum, sencillos y EPs de Dune Moon. Toca una tarjeta para abrir su
+            reproductor desde Spotify sin salir de esta página.
           </p>
         </Reveal>
 

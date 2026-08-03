@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="footer__brand">
           <span className="footer__logo display">DUNE MOON</span>
           <p>
-            Proyecto electrónico de género WAVE / SYNTHWAVE desde Riobamba,
+            Proyecto electrónico de género Synthpop / Synthwave desde Riobamba,
             Ecuador.
           </p>
         </div>

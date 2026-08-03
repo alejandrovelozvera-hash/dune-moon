@@ -19,7 +19,7 @@ export default function Contact() {
           </p>
         </Reveal>
 
-        <div className="contact__grid">
+          <div className="contact__grid">
           {SOCIALS.map((s, i) => (
             <Reveal key={s.name} delay={(i % 4) + 1}>
               <a
@@ -43,6 +43,22 @@ export default function Contact() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="contact__booking">
+          <p className="contact__booking-title">Booking · contacto</p>
+          <p className="contact__booking-sub">
+            Shows, colaboraciones y prensa. Escríbeme directo:
+          </p>
+          <a
+            href="mailto:imdunemusic@gmail.com"
+            className="btn btn--primary contact__mail-btn"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z" />
+            </svg>
+            imdunemusic@gmail.com
+          </a>
+        </Reveal>
       </div>
     </section>
   );

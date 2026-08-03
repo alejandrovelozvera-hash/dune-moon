@@ -1,4 +1,13 @@
-const ITEMS = ["SYNTHWAVE", "SYNTHPOP", "WAVE", "DUNE MOON", "1980s VIBES", "RIOBAMBA", "ECUADOR"];
+const ITEMS = [
+  "En Mi Mente (2026 Remaster)",
+  "T.B.Y.S.V",
+  "Tiempo",
+  "En Mi Mente",
+  "Ahogado",
+  "Somos",
+  "The Story of a Lost World",
+  "Distancias",
+];
 
 export default function Marquee() {
   const row = [...ITEMS, ...ITEMS];

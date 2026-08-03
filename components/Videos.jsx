@@ -144,6 +144,7 @@ export default function Videos() {
 
   useEffect(() => {
     if (playing || paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = setTimeout(() => setActive((a) => (a + 1) % VIDEOS.length), 5000);
     return () => clearTimeout(t);
   }, [active, playing, paused]);
