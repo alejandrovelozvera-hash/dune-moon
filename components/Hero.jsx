@@ -54,7 +54,15 @@ function ReleaseSlide() {
 
         <div className="hero__release-info">
           <span className="hero__release-badge">Nuevo single</span>
-          <h2 className="display hero__release-title">En Mi Mente</h2>
+          <h2 className="hero__release-title">
+            <img
+              src="/enmimentetitulo.svg"
+              alt="En Mi Mente"
+              width="1011"
+              height="57"
+              loading="eager"
+            />
+          </h2>
           <p className="hero__release-sub">(2026 Remaster)</p>
           <p className="hero__release-date">
             {released ? "Ya disponible" : "Se estrena el 15 de agosto"}
