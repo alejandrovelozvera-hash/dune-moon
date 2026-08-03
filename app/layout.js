@@ -1,18 +1,11 @@
-import { Orbitron, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./components.css";
-
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
-  subsets: ["latin"],
-  weight: ["500", "700", "800"],
-  display: "swap",
-});
 
 const grotesk = Space_Grotesk({
   variable: "--font-grotesk",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -51,7 +44,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${orbitron.variable} ${grotesk.variable}`}>
+    <html lang="es" className={grotesk.variable}>
       <body>{children}</body>
     </html>
   );
