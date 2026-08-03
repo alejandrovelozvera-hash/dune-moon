@@ -66,6 +66,7 @@ function ReleaseCard({ item, index }) {
 
 export default function Music() {
   const spotify = SOCIALS.find((s) => s.name === "Spotify");
+  const album = DISCOGRAPHY.album;
 
   return (
     <section id="musica" className="section">
@@ -77,13 +78,27 @@ export default function Music() {
             <Equalizer />
           </h2>
           <p className="section-sub">
-            Álbum, sencillos y EPs de Dune Moon. Toca una tarjeta para abrir su
-            reproductor desde Spotify sin salir de esta página.
+            Top tracks, álbum, sencillos y EPs de Dune Moon. Toca una tarjeta
+            para abrir su reproductor desde Spotify sin salir de esta página.
           </p>
         </Reveal>
+      </div>
 
-        <div className="music__featured">
-          <Reveal delay={1} className="music__artist panel">
+      <Reveal className="music__toptracks">
+        <div
+          className="music__toptracks-bg"
+          aria-hidden="true"
+          style={{ backgroundImage: `url(/covers/${album.id}.jpg)` }}
+        />
+        <div className="container music__toptracks-inner">
+          <div className="music__toptracks-info">
+            <p className="eyebrow">Lo más escuchado</p>
+            <h3 className="music__toptracks-title">Top Tracks</h3>
+            <p className="music__toptracks-sub">
+              Los temas más reproducidos de Dune Moon en Spotify.
+            </p>
+          </div>
+          <div className="music__artist panel">
             <iframe
               title="Dune Moon en Spotify"
               src={artistUrl}
@@ -94,14 +109,18 @@ export default function Music() {
               loading="lazy"
               style={{ borderRadius: 12 }}
             />
-          </Reveal>
+          </div>
+        </div>
+      </Reveal>
 
-          <Reveal delay={2} className="music__album panel">
-            <Embed id={DISCOGRAPHY.album.id} name={DISCOGRAPHY.album.name} height={420} />
-            <div className="music__album-tag">
-              <span>Álbum</span>
-              <span>{DISCOGRAPHY.album.year}</span>
-            </div>
+      <div className="container">
+        <div className="music__group">
+          <Reveal className="music__group-head">
+            <h3 className="music__group-title">{album.name}</h3>
+            <span className="music__group-count">{album.year}</span>
+          </Reveal>
+          <Reveal delay={1} className="music__album panel">
+            <Embed id={album.id} name={album.name} height={352} />
           </Reveal>
         </div>
 
