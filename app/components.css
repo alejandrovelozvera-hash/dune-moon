@@ -3,12 +3,22 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  transition: background 0.4s var(--ease), border-color 0.4s var(--ease),
-    backdrop-filter 0.4s var(--ease);
+  transition: border-color 0.4s var(--ease);
   border-bottom: 1px solid transparent;
 }
 
-.nav--scrolled {
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+
+.nav--scrolled::before {
   background: rgba(5, 3, 14, 0.72);
   backdrop-filter: blur(18px);
   border-bottom-color: var(--border);
