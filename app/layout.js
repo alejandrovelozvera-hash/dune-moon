@@ -1,13 +1,5 @@
-import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./components.css";
-
-const grotesk = Space_Grotesk({
-  variable: "--font-grotesk",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const metadata = {
   title: "Dune Moon · Synthwave / Synthpop",
@@ -36,7 +28,7 @@ export const metadata = {
     description:
       "Proyecto electrónico de género WAVE / SYNTHWAVE desde Riobamba, Ecuador.",
   },
-  metadataBase: new URL("https://dunemoon.com"),
+  metadataBase: new URL("https://dune-moon.vercel.app"),
   icons: {
     icon: "/favicon.svg",
   },
@@ -44,7 +36,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={grotesk.variable}>
+    <html lang="es">
       <body>{children}</body>
     </html>
   );

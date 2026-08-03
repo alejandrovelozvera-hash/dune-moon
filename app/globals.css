@@ -1,24 +1,26 @@
 :root {
-  --bg: #05030e;
-  --bg-2: #0a0620;
+  --bg: #060a14;
+  --bg-2: #0b1226;
   --surface: rgba(255, 255, 255, 0.04);
   --surface-2: rgba(255, 255, 255, 0.07);
   --border: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --text: #e8f0ff;
-  --text-dim: #94a0c3;
-  --text-faint: #5d6687;
-  --cyan: #00eaff;
-  --magenta: #ff2ea6;
-  --violet: #8a5cff;
-  --sun: #ffb347;
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --text: #ffffff;
+  --text-dim: #b7c2d8;
+  --text-faint: #7e8aa8;
+  --navy: #334677;
+  --navy-light: #4a68a8;
+  --cyan: var(--navy-light);
+  --magenta: var(--navy);
+  --violet: var(--navy);
+  --sun: var(--navy);
   --max-w: 1180px;
-  --font-display: var(--font-grotesk);
-  --font-body: var(--font-grotesk);
+  --font-display: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
   --radius: 18px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --glow-cyan: 0 0 40px rgba(0, 234, 255, 0.35);
-  --glow-magenta: 0 0 40px rgba(255, 46, 166, 0.35);
+  --glow-cyan: 0 0 40px rgba(91, 124, 184, 0.35);
+  --glow-magenta: 0 0 40px rgba(51, 70, 119, 0.35);
 }
 
 * {
@@ -38,6 +40,7 @@ body {
   color: var(--text);
   background: var(--bg);
   font-family: var(--font-body), system-ui, sans-serif;
+  letter-spacing: 0.012em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -49,9 +52,9 @@ body::before {
   inset: 0;
   z-index: -3;
   background:
-    radial-gradient(60% 50% at 80% 0%, rgba(138, 92, 255, 0.16) 0%, transparent 60%),
-    radial-gradient(50% 45% at 10% 10%, rgba(0, 234, 255, 0.12) 0%, transparent 55%),
-    radial-gradient(55% 55% at 50% 110%, rgba(255, 46, 166, 0.12) 0%, transparent 60%),
+    radial-gradient(60% 50% at 80% 0%, rgba(51, 70, 119, 0.22) 0%, transparent 60%),
+    radial-gradient(50% 45% at 10% 10%, rgba(91, 124, 184, 0.16) 0%, transparent 55%),
+    radial-gradient(55% 55% at 50% 110%, rgba(51, 70, 119, 0.2) 0%, transparent 60%),
     var(--bg);
 }
 
@@ -62,8 +65,8 @@ body::after {
   inset: 0;
   z-index: -2;
   background-image:
-    linear-gradient(rgba(0, 234, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 234, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(91, 124, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 124, 184, 0.05) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(70% 60% at 50% 0%, black 30%, transparent 100%);
   pointer-events: none;
@@ -81,12 +84,12 @@ iframe {
 }
 
 ::selection {
-  background: var(--magenta);
+  background: var(--navy);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--navy-light);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -107,17 +110,17 @@ iframe {
 .display {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   line-height: 1.04;
   text-transform: uppercase;
 }
 
 .gradient-text {
-  background: linear-gradient(100deg, var(--cyan) 0%, var(--violet) 45%, var(--magenta) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: var(--text);
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: currentColor;
 }
 
 .eyebrow {
@@ -180,14 +183,15 @@ iframe {
 }
 
 .btn--primary {
-  color: #04121a;
-  background: linear-gradient(90deg, var(--cyan), #57d7ff);
-  box-shadow: var(--glow-cyan);
+  color: #ffffff;
+  background: var(--navy);
+  box-shadow: 0 0 30px rgba(51, 70, 119, 0.45);
 }
 
 .btn--primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 60px rgba(0, 234, 255, 0.55);
+  background: #40568c;
+  box-shadow: 0 0 50px rgba(51, 70, 119, 0.65);
 }
 
 .btn--ghost {
@@ -199,7 +203,7 @@ iframe {
 
 .btn--ghost:hover {
   transform: translateY(-3px);
-  border-color: var(--cyan);
+  border-color: var(--navy-light);
   box-shadow: var(--glow-cyan);
 }
 

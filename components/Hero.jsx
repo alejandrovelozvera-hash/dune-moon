@@ -54,6 +54,27 @@ export default function Hero() {
         <div className="hero__meta">
           <span>Disponible en todas las plataformas</span>
         </div>
+
+        <a href="#musica" className="hero__single" aria-label="Nuevo single En Mi Mente (2026 Remaster)">
+          <span className="hero__single-cover">
+            <img
+              src="/en-mi-mente-2026-remaster.jpg"
+              alt="Portada de En Mi Mente (2026 Remaster)"
+              width="800"
+              height="800"
+              loading="eager"
+            />
+          </span>
+          <span className="hero__single-body">
+            <span className="hero__single-badge">Nuevo single · 2026</span>
+            <span className="hero__single-title">En Mi Mente</span>
+            <span className="hero__single-sub">(2026 Remaster)</span>
+          </span>
+          <svg className="hero__single-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
       </div>
 
       <a href="#musica" className="hero__scroll" aria-label="Desplazarse a música">
