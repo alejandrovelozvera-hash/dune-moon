@@ -45,10 +45,7 @@ export default function Contact() {
         </div>
 
         <Reveal className="contact__booking">
-          <p className="contact__booking-title">Booking · contacto</p>
-          <p className="contact__booking-sub">
-            Shows, colaboraciones y prensa. Escríbeme directo:
-          </p>
+          <h3 className="contact__booking-title">Contacto</h3>
           <a
             href="mailto:imdunemusic@gmail.com"
             className="btn btn--primary contact__mail-btn"
