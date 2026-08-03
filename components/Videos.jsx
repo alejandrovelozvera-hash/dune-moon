@@ -72,8 +72,9 @@ function VideoStage({ video, playing, onPlay, thumb }) {
             title={video.title}
             src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
+            referrerPolicy="no-referrer"
           />
         </div>
       ) : (

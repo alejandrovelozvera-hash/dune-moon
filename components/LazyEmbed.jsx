@@ -39,6 +39,8 @@ export default function LazyEmbed({ src, title, height = 352, cover }) {
           frameBorder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
+          referrerPolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
           style={{ borderRadius: 12 }}
         />
       ) : (
