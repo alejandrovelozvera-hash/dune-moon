@@ -215,10 +215,13 @@
   z-index: 2;
   padding-block: 130px 110px;
   will-change: transform;
-  overflow: hidden;
 }
 
 /* slider */
+.hero__slider-viewport {
+  overflow: hidden;
+}
+
 .hero__slider {
   display: flex;
   width: 200%;

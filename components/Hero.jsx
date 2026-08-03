@@ -146,12 +146,14 @@ export default function Hero() {
         className="container hero__content"
         style={{ transform: `translateY(${parallax}px)` }}
       >
-        <div
-          className="hero__slider"
-          style={{ transform: `translateX(-${slide * 50}%)` }}
-        >
-          <ReleaseSlide />
-          <MainSlide />
+        <div className="hero__slider-viewport">
+          <div
+            className="hero__slider"
+            style={{ transform: `translateX(-${slide * 50}%)` }}
+          >
+            <ReleaseSlide />
+            <MainSlide />
+          </div>
         </div>
 
         <div className="hero__dots" role="tablist" aria-label="Contenido del hero">
