@@ -25,17 +25,6 @@ export default function Nav() {
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="container nav__inner">
         <a href="#top" className="nav__logo" onClick={() => setOpen(false)}>
-          <span className="nav__logo-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
-              <path
-                d="M12 2C7 8 5 11.5 5 15a7 7 0 0 0 14 0c0-3.5-2-7-7-13Z"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinejoin="round"
-              />
-              <circle cx="12" cy="15" r="3" fill="currentColor" />
-            </svg>
-          </span>
           <span className="nav__logo-text">DUNE&nbsp;MOON</span>
         </a>
 

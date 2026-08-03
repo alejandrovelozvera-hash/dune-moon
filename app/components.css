@@ -33,11 +33,6 @@
   font-size: 1.02rem;
 }
 
-.nav__logo-mark {
-  color: var(--cyan);
-  filter: drop-shadow(0 0 8px rgba(91, 124, 184, 0.7));
-}
-
 .nav__logo-text {
   text-transform: uppercase;
 }
