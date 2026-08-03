@@ -60,8 +60,8 @@ function useBestThumb(id, startStep = 0) {
   return { src, tried };
 }
 
-function VideoStage({ video, playing, onPlay }) {
-  const { src, tried } = useBestThumb(video.id, 0);
+function VideoStage({ video, playing, onPlay, thumb }) {
+  const { src, tried } = thumb;
   const triedLabel = THUMB_STEPS[tried];
 
   return (
@@ -113,6 +113,7 @@ export default function Videos() {
   const railRef = useRef(null);
 
   const current = VIDEOS[active];
+  const currentThumb = useBestThumb(current.id, 0);
 
   const select = (i) => {
     setActive(i);
@@ -165,65 +166,73 @@ export default function Videos() {
             reproducir en la pantalla grande.
           </p>
         </Reveal>
+      </div>
 
-        <Reveal delay={1}>
-          <div className="videos__player">
-            <VideoStage
-              key={current.id}
-              video={current}
-              playing={playing}
-              onPlay={() => setPlaying(true)}
-            />
+      <Reveal className="videos__showcase">
+        <div
+          className="videos__showcase-bg"
+          aria-hidden="true"
+          style={{ backgroundImage: `url(${currentThumb.src})` }}
+        />
+        <div className="container videos__showcase-inner">
+          <VideoStage
+            key={current.id}
+            video={current}
+            playing={playing}
+            onPlay={() => setPlaying(true)}
+            thumb={currentThumb}
+          />
 
-            <div className="videos__carousel">
-              <button
-                className="videos__nav"
-                onClick={goPrev}
-                aria-label="Video anterior"
-              >
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
+          <div className="videos__carousel">
+            <button
+              className="videos__nav"
+              onClick={goPrev}
+              aria-label="Video anterior"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
 
-              <div
-                className="videos__rail"
-                ref={railRef}
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
-              >
-                {VIDEOS.map((video, i) => (
-                  <button
-                    key={video.id}
-                    className={`video-tile${i === active ? " is-active" : ""}`}
-                    onClick={() => select(i)}
-                    aria-label={video.title}
-                    aria-pressed={i === active}
-                  >
-                    <TileThumb id={video.id} />
-                    <span className="video-tile__bar">
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-                        <path d="M8 5.14v14l11-7-11-7Z" />
-                      </svg>
-                    </span>
-                    <span className="video-tile__label">{video.title}</span>
-                  </button>
-                ))}
-              </div>
-
-              <button
-                className="videos__nav"
-                onClick={goNext}
-                aria-label="Video siguiente"
-              >
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
+            <div
+              className="videos__rail"
+              ref={railRef}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              {VIDEOS.map((video, i) => (
+                <button
+                  key={video.id}
+                  className={`video-tile${i === active ? " is-active" : ""}`}
+                  onClick={() => select(i)}
+                  aria-label={video.title}
+                  aria-pressed={i === active}
+                >
+                  <TileThumb id={video.id} />
+                  <span className="video-tile__bar">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                      <path d="M8 5.14v14l11-7-11-7Z" />
+                    </svg>
+                  </span>
+                  <span className="video-tile__label">{video.title}</span>
+                </button>
+              ))}
             </div>
-          </div>
-        </Reveal>
 
+            <button
+              className="videos__nav"
+              onClick={goNext}
+              aria-label="Video siguiente"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </Reveal>
+
+      <div className="container">
         <Reveal className="videos__cta" delay={2}>
           <a
             href={youtube.url}

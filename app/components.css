@@ -929,8 +929,36 @@
 }
 
 /* ================= VIDEOS ================= */
-.videos__player {
+.videos__showcase {
+  position: relative;
   margin-top: 48px;
+  padding-block: clamp(40px, 6vw, 72px);
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  border-block: 1px solid var(--border);
+  background: rgba(10, 14, 30, 0.35);
+}
+
+.videos__showcase-bg {
+  position: absolute;
+  inset: -60px 0;
+  background-position: center;
+  background-size: cover;
+  filter: blur(34px) saturate(1.15);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.videos__showcase-inner {
+  position: relative;
+}
+
+.videos__player {
+  margin-top: 0;
 }
 
 .videos__stage {
@@ -1496,6 +1524,10 @@
   .videos__stage-play {
     width: 68px;
     height: 68px;
+  }
+
+  .videos__showcase {
+    padding-block: 40px;
   }
 
   .videos__stage-info {
