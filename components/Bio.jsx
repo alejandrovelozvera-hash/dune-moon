@@ -1,14 +1,17 @@
 import Reveal from "./Reveal";
-import { SOCIALS } from "@/lib/data";
+import { SOCIALS, DISCOGRAPHY } from "@/lib/data";
 
 const STATS = [
   { value: "2015", label: "Activos desde" },
   { value: "01", label: "Álbum · Tiempo" },
-  { value: "WAVE", label: "Género" },
+  { value: "04", label: "Sencillos" },
+  { value: "03", label: "EPs" },
 ];
 
 export default function Bio() {
   const instagram = SOCIALS.find((s) => s.name === "Instagram");
+  const singles = DISCOGRAPHY.singles.length;
+  const eps = DISCOGRAPHY.eps.length;
 
   return (
     <section id="bio" className="section">
@@ -27,7 +30,7 @@ export default function Bio() {
           <Reveal className="bio__text" delay={1}>
             <p>
               <strong>DUNE MOON</strong> es un proyecto electrónico de género{" "}
-              <em>WAVE / SYNTHWAVE</em> establecido en la ciudad de{" "}
+              <em>Synthpop / Synthwave</em> establecido en la ciudad de{" "}
               <strong>Riobamba, Ecuador</strong>.
             </p>
             <p>
@@ -36,9 +39,13 @@ export default function Bio() {
               y una estética futurista que dialoga con el pasado.
             </p>
             <p>
+              Con {singles} sencillos, {eps} EPs y el álbum{" "}
+              <em>Tiempo (2019)</em> ya publicados, el proyecto sigue expandiendo
+              su universo sonoro con producciones propias.
+            </p>
+            <p>
               Composición, producción y dirección artística a cargo de{" "}
-              <strong>Alejandro Veloz</strong>. Arreglos y producción de{" "}
-              <em>Paco Andrade (Solaz Estudio)</em>.
+              <strong>Alejandro Veloz</strong>.
             </p>
           </Reveal>
 

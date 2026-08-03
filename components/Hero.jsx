@@ -32,7 +32,7 @@ export default function Hero() {
           <span className="gradient-text"> MOON</span>
         </h1>
 
-        <p className="hero__tag">SYNTHWAVE · SYNTHPOP · WAVE</p>
+        <p className="hero__tag">SYNTHPOP · SYNTHWAVE</p>
 
         <p className="hero__desc">
           Música ochentera revivida con un toque actual. Un viaje sonoro entre

@@ -4,8 +4,65 @@ import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 import { VIDEOS, SOCIALS } from "@/lib/data";
 
+const THUMB_STEPS = ["maxresdefault", "hqdefault", "mqdefault"];
+
+function getThumb(id, step) {
+  return `https://i.ytimg.com/vi/${id}/${THUMB_STEPS[step]}.jpg`;
+}
+
+function probeThumb(id, step) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const src = getThumb(id, step);
+    const done = (ok, width) => {
+      img.onload = null;
+      img.onerror = null;
+      resolve({ ok, width, src });
+    };
+    img.onload = () => {
+      // YouTube devuelve un placeholder gris de 120px cuando la miniatura
+      // no existe (HTTP 200 con imagen 120x90). Lo descartamos por tamaño.
+      done(img.naturalWidth >= 320, img.naturalWidth);
+    };
+    img.onerror = () => done(false, 0);
+    img.src = src;
+  });
+}
+
+// Busca la mejor miniatura disponible: maxresdefault -> hqdefault -> mqdefault
+function useBestThumb(id, startStep = 0) {
+  const [src, setSrc] = useState(getThumb(id, startStep));
+  const [tried, setTried] = useState(startStep);
+
+  useEffect(() => {
+    let cancelled = false;
+    setSrc(getThumb(id, startStep));
+    setTried(startStep);
+
+    (async () => {
+      for (let step = startStep; step < THUMB_STEPS.length; step++) {
+        if (cancelled) return;
+        const { ok } = await probeThumb(id, step);
+        if (cancelled) return;
+        if (ok) {
+          setSrc(getThumb(id, step));
+          setTried(step);
+          return;
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id, startStep]);
+
+  return { src, tried };
+}
+
 function VideoStage({ video, playing, onPlay }) {
-  const thumb = `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`;
+  const { src, tried } = useBestThumb(video.id, 0);
+  const triedLabel = THUMB_STEPS[tried];
 
   return (
     <div className="videos__stage">
@@ -22,10 +79,16 @@ function VideoStage({ video, playing, onPlay }) {
       ) : (
         <button
           className="videos__stage-thumb"
-          style={{ backgroundImage: `url(${thumb})` }}
           onClick={onPlay}
           aria-label={`Reproducir: ${video.title}`}
         >
+          <img
+            className="videos__stage-img"
+            src={src}
+            alt=""
+            loading="eager"
+            data-res={triedLabel}
+          />
           <span className="videos__stage-play">
             <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true">
               <path d="M8 5.14v14l11-7-11-7Z" />
@@ -132,11 +195,11 @@ export default function Videos() {
                   <button
                     key={video.id}
                     className={`video-tile${i === active ? " is-active" : ""}`}
-                    style={{ backgroundImage: `url(https://i.ytimg.com/vi/${video.id}/mqdefault.jpg)` }}
                     onClick={() => select(i)}
                     aria-label={video.title}
                     aria-pressed={i === active}
                   >
+                    <TileThumb id={video.id} />
                     <span className="video-tile__bar">
                       <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
                         <path d="M8 5.14v14l11-7-11-7Z" />
@@ -172,5 +235,20 @@ export default function Videos() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function TileThumb({ id }) {
+  // las tiles usan mqdefault/hqdefault: mejor rendimiento en tamaños chicos
+  const { src, tried } = useBestThumb(id, 1);
+  const triedLabel = THUMB_STEPS[tried];
+  return (
+    <img
+      className="video-tile__img"
+      src={src}
+      alt=""
+      loading="lazy"
+      data-res={triedLabel}
+    />
   );
 }
