@@ -1241,6 +1241,7 @@
 
   .bio__media {
     max-width: 480px;
+    justify-self: center;
   }
 
   .footer__inner {
