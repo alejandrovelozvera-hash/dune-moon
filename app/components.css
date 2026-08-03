@@ -172,6 +172,9 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background:
+    radial-gradient(90% 65% at 50% 118%, rgba(105, 67, 123, 0.26) 0%, transparent 62%),
+    linear-gradient(180deg, rgba(6, 10, 20, 0) 42%, rgba(74, 104, 168, 0.16) 80%, rgba(105, 67, 123, 0.2) 100%);
 }
 
 .hero__sun {
