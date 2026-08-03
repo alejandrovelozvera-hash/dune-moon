@@ -327,6 +327,21 @@
 /* release slide */
 .hero__release {
   display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 48px);
+}
+
+.hero__release-head {
+  width: 100%;
+  max-width: 1080px;
+}
+
+.hero__release-head .hero__release-badge {
+  margin-bottom: 22px;
+}
+
+.hero__release-body {
+  display: flex;
   align-items: center;
   gap: clamp(28px, 5vw, 64px);
 }
@@ -350,6 +365,7 @@
 
 .hero__release-info {
   min-width: 0;
+  flex: 1;
 }
 
 .hero__release-badge {
@@ -364,7 +380,6 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  margin-bottom: 22px;
 }
 
 .hero__release-badge::before {
@@ -393,7 +408,7 @@
 
 .hero__release-title img {
   display: block;
-  width: min(100%, 560px);
+  width: 100%;
   height: auto;
 }
 
@@ -1593,12 +1608,18 @@
     gap: 20px;
   }
 
+  .hero__release-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
   .hero__release-cover {
     width: clamp(140px, 38vw, 190px);
   }
 
   .hero__release-title img {
-    width: min(100%, 320px);
+    width: 100%;
   }
 
   .hero__release-badge {

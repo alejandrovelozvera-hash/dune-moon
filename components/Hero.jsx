@@ -42,17 +42,7 @@ function ReleaseSlide() {
       <p className="eyebrow hero__eyebrow">Nuevo lanzamiento · 2026</p>
 
       <div className="hero__release">
-        <div className="hero__release-cover">
-          <img
-            src="/en-mi-mente-2026-remaster.jpg"
-            alt="Portada de En Mi Mente (2026 Remaster)"
-            width="800"
-            height="800"
-            loading="eager"
-          />
-        </div>
-
-        <div className="hero__release-info">
+        <div className="hero__release-head">
           <span className="hero__release-badge">Nuevo single</span>
           <h2 className="hero__release-title">
             <img
@@ -64,31 +54,46 @@ function ReleaseSlide() {
             />
           </h2>
           <p className="hero__release-sub">(2026 Remaster)</p>
-          <p className="hero__release-date">
-            {released ? "Ya disponible" : "Se estrena el 15 de agosto"}
-          </p>
+        </div>
 
-          {!released && (
-            <div className="hero__countdown" role="timer" aria-label="Cuenta regresiva para el estreno">
-              {units.map((u) => (
-                <span key={u.label} className="hero__countdown-unit">
-                  <span className="hero__countdown-value">{u.value}</span>
-                  <span className="hero__countdown-label">{u.label}</span>
-                </span>
-              ))}
+        <div className="hero__release-body">
+          <div className="hero__release-cover">
+            <img
+              src="/en-mi-mente-2026-remaster.jpg"
+              alt="Portada de En Mi Mente (2026 Remaster)"
+              width="800"
+              height="800"
+              loading="eager"
+            />
+          </div>
+
+          <div className="hero__release-info">
+            <p className="hero__release-date">
+              {released ? "Ya disponible" : "Se estrena el 15 de agosto"}
+            </p>
+
+            {!released && (
+              <div className="hero__countdown" role="timer" aria-label="Cuenta regresiva para el estreno">
+                {units.map((u) => (
+                  <span key={u.label} className="hero__countdown-unit">
+                    <span className="hero__countdown-value">{u.value}</span>
+                    <span className="hero__countdown-label">{u.label}</span>
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div className="hero__actions">
+              <a href="#musica" className="btn btn--primary">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5.14v14l11-7-11-7Z" />
+                </svg>
+                Escuchar en Spotify
+              </a>
+              <a href="#videos" className="btn btn--ghost">
+                Ver videos
+              </a>
             </div>
-          )}
-
-          <div className="hero__actions">
-            <a href="#musica" className="btn btn--primary">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                <path d="M8 5.14v14l11-7-11-7Z" />
-              </svg>
-              Escuchar en Spotify
-            </a>
-            <a href="#videos" className="btn btn--ghost">
-              Ver videos
-            </a>
           </div>
         </div>
       </div>
