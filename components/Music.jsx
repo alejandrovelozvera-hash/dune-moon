@@ -3,9 +3,12 @@
 import { useState } from "react";
 import Reveal from "./Reveal";
 import Equalizer from "./Equalizer";
+import LazyEmbed from "./LazyEmbed";
 import { ARTIST_ID, DISCOGRAPHY, SOCIALS } from "@/lib/data";
 
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
+const embedUrl = (id) =>
+  `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
 function Embed({ id, name, height = 352 }) {
   return (
@@ -59,6 +62,9 @@ function ReleaseCard({ item, index }) {
             <Embed id={item.id} name={item.name} height={352} />
           </div>
         )}
+        <span className="release__status" aria-live="polite">
+          {open ? `Reproductor de ${item.name} abierto` : ""}
+        </span>
       </div>
     </Reveal>
   );
@@ -99,15 +105,11 @@ export default function Music() {
             </p>
           </div>
           <div className="music__artist panel">
-            <iframe
-              title="Dune Moon en Spotify"
+            <LazyEmbed
               src={artistUrl}
-              width="100%"
-              height="420"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              style={{ borderRadius: 12 }}
+              title="Dune Moon en Spotify"
+              height={420}
+              cover={`/covers/${album.id}.jpg`}
             />
           </div>
         </div>
@@ -120,7 +122,12 @@ export default function Music() {
             <span className="music__group-count">{album.year}</span>
           </Reveal>
           <Reveal delay={1} className="music__album panel">
-            <Embed id={album.id} name={album.name} height={352} />
+            <LazyEmbed
+              src={embedUrl(album.id)}
+              title={`${album.name} en Spotify`}
+              height={352}
+              cover={`/covers/${album.id}.jpg`}
+            />
           </Reveal>
         </div>
 

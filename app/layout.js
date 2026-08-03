@@ -42,7 +42,7 @@ export const metadata = {
     url: "https://dune-moon.vercel.app",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
@@ -54,7 +54,7 @@ export const metadata = {
     title: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
     description:
       "Proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador.",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
   icons: {
     icon: [

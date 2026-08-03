@@ -1,9 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Reveal({ children, className = "", delay = 0, as: Tag = "div" }) {
   const ref = useRef(null);
+  const [short, setShort] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    setShort(mq.matches);
+    const onChange = (e) => setShort(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -25,7 +34,10 @@ export default function Reveal({ children, className = "", delay = 0, as: Tag = 
     return () => observer.disconnect();
   }, []);
 
-  const delayClass = delay > 0 ? `reveal--delay-${delay}` : "";
+  // En móvil (grilla de 1 columna) el escalonado se siente desigual:
+  // se reduce a delay 1 como máximo.
+  const effectiveDelay = short ? Math.min(delay, 1) : delay;
+  const delayClass = effectiveDelay > 0 ? `reveal--delay-${effectiveDelay}` : "";
 
   return (
     <Tag ref={ref} className={`reveal ${delayClass} ${className}`}>
