@@ -1573,15 +1573,15 @@
   .hero__release {
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 20px;
   }
 
   .hero__release-cover {
-    width: clamp(150px, 42vw, 200px);
+    width: clamp(140px, 38vw, 190px);
   }
 
   .hero__release-title {
-    font-size: clamp(2.4rem, 12vw, 4.4rem);
+    font-size: clamp(2.2rem, 11vw, 4.2rem);
   }
 
   .hero__release-badge {
@@ -1670,5 +1670,43 @@
 
   .footer__bottom {
     flex-direction: column;
+  }
+
+  /* Lectura móvil: stats apiladas y foto limitada */
+  .section-sub {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .bio__stat {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-bottom: 18px;
+  }
+
+  .bio__photo {
+    max-height: 260px;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .bio__media {
+    max-width: 360px;
+  }
+
+  .contact__info small {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .contact__card {
+    padding: 14px;
+  }
+
+  .contact__info strong {
+    font-size: 0.92rem;
   }
 }
