@@ -14,7 +14,10 @@ export default function Bio() {
     <section id="bio" className="section">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">La historia</p>
+          <p className="eyebrow">
+            <span className="section-index">03</span>
+            La historia
+          </p>
           <h2 className="section-title">
             <span className="gradient-text">Bio</span>
           </h2>

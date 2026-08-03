@@ -51,7 +51,10 @@ export default function Videos() {
     <section id="videos" className="section">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">En vivo en pantalla</p>
+          <p className="eyebrow">
+            <span className="section-index">02</span>
+            En vivo en pantalla
+          </p>
           <h2 className="section-title">
             <span className="gradient-text">Videos</span>
           </h2>

@@ -7,7 +7,10 @@ export default function Contact() {
     <section id="contacto" className="section">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">Conéctate</p>
+          <p className="eyebrow">
+            <span className="section-index">04</span>
+            Conéctate
+          </p>
           <h2 className="section-title">
             <span className="gradient-text">Sígueme</span>
           </h2>
