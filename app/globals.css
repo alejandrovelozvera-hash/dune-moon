@@ -10,17 +10,17 @@
   --text-faint: #7e8aa8;
   --navy: #334677;
   --navy-light: #4a68a8;
-  --cyan: var(--navy-light);
-  --magenta: var(--navy);
-  --violet: var(--navy);
-  --sun: var(--navy);
+  --cyan: #2ec5ff;
+  --magenta: #ff4fd8;
+  --violet: #8a5cff;
+  --sun: #ff6ac1;
   --max-w: 1180px;
   --font-display: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
   --font-body: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
   --radius: 18px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --glow-cyan: 0 0 40px rgba(91, 124, 184, 0.35);
-  --glow-magenta: 0 0 40px rgba(51, 70, 119, 0.35);
+  --glow-cyan: 0 0 40px rgba(46, 197, 255, 0.4);
+  --glow-magenta: 0 0 40px rgba(255, 79, 216, 0.35);
 }
 
 * {
@@ -149,11 +149,11 @@ iframe {
 }
 
 .gradient-text {
-  color: var(--text);
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  -webkit-text-fill-color: currentColor;
+  color: transparent;
+  background: linear-gradient(100deg, var(--cyan) 0%, var(--violet) 55%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .eyebrow {
@@ -217,25 +217,26 @@ iframe {
 
 .btn--primary {
   color: #ffffff;
-  background: rgba(51, 70, 119, 0.55);
-  backdrop-filter: blur(16px);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+  border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
-    0 0 30px rgba(51, 70, 119, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    0 0 30px rgba(46, 197, 255, 0.45),
+    0 0 60px rgba(138, 92, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
 .btn--primary:hover {
   transform: translateY(-3px);
-  background: rgba(64, 86, 140, 0.7);
+  background: linear-gradient(135deg, #56d6ff 0%, #a279ff 100%);
   box-shadow:
-    0 0 50px rgba(51, 70, 119, 0.65),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    0 0 50px rgba(46, 197, 255, 0.65),
+    0 0 90px rgba(138, 92, 255, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .btn--ghost {
   color: var(--text);
-  border-color: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.25);
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(16px) saturate(1.3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
@@ -243,8 +244,8 @@ iframe {
 
 .btn--ghost:hover {
   transform: translateY(-3px);
-  border-color: var(--navy-light);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--cyan);
+  background: rgba(46, 197, 255, 0.1);
   box-shadow:
     var(--glow-cyan),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
