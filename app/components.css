@@ -2080,8 +2080,8 @@
   }
 
   .bio__photo {
-    max-height: 260px;
     width: 100%;
+    height: auto;
     object-fit: cover;
     object-position: top;
   }
