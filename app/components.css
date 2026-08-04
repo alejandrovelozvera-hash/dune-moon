@@ -1782,10 +1782,60 @@
 
   .hero__main {
     grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
   }
 
   .hero__main-logo {
-    width: clamp(140px, 30vw, 220px);
+    width: clamp(140px, 38vw, 180px);
+    justify-self: center;
+  }
+
+  .hero__main-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__main-text .hero__desc {
+    text-align: center;
+  }
+
+  .hero__main-text .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__slide--release .hero__release {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero__slide--release .hero__eyebrow,
+  .hero__slide--main .hero__eyebrow {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__slide--release .hero__release-head {
+    align-items: center;
+  }
+
+  .hero__slide--release .hero__release-body {
+    align-items: center;
+  }
+
+  .hero__slide--release .hero__release-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__slide--release .hero__release-date {
+    text-align: center;
+  }
+
+  .hero__slide--release .hero__actions {
+    justify-content: center;
   }
 }
 
@@ -1864,13 +1914,14 @@
 
   .hero__release {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
+    text-align: center;
   }
 
   .hero__release-body {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
   }
 
