@@ -1,17 +1,21 @@
+"use client";
+
 import Reveal from "./Reveal";
 import { SOCIALS, DISCOGRAPHY } from "@/lib/data";
-
-const STATS = [
-  { value: "2015", label: "Activos desde" },
-  { value: "01", label: "Álbum · Tiempo" },
-  { value: "04", label: "Sencillos" },
-  { value: "03", label: "EPs" },
-];
+import { useLang } from "@/lib/i18n";
 
 export default function Bio() {
+  const { t } = useLang();
   const instagram = SOCIALS.find((s) => s.name === "Instagram");
   const singles = DISCOGRAPHY.singles.length;
   const eps = DISCOGRAPHY.eps.length;
+
+  const STATS = [
+    { value: "2015", label: t("bio.statActive") },
+    { value: "01", label: t("bio.statAlbum") },
+    { value: "04", label: t("bio.statSingles") },
+    { value: "03", label: t("bio.statEps") },
+  ];
 
   return (
     <section id="bio" className="section">
@@ -19,34 +23,23 @@ export default function Bio() {
         <Reveal>
           <p className="eyebrow">
             <span className="section-index">03</span>
-            La historia
+            {t("bio.eyebrow")}
           </p>
           <h2 className="section-title">
-            <span className="gradient-text">Bio</span>
+            <span className="gradient-text">{t("bio.title")}</span>
           </h2>
         </Reveal>
 
         <div className="bio__layout">
           <Reveal className="bio__text" delay={1}>
             <p>
-              <strong>DUNE MOON</strong> es un proyecto electrónico de género{" "}
-              <em>Synthpop / Synthwave</em> establecido en la ciudad de{" "}
-              <strong>Riobamba, Ecuador</strong>.
+              <strong>DUNE MOON</strong> {t("bio.p1")}
             </p>
+            <p>{t("bio.p2")}</p>
             <p>
-              La propuesta se enfoca en revivir la música de los 80s con un
-              toque actual: sintetizadores analógicos, líneas melódicas nostálgicas
-              y una estética futurista que dialoga con el pasado.
+              {t("bio.p3", { singles, eps })}
             </p>
-            <p>
-              Con {singles} sencillos, {eps} EPs y el álbum{" "}
-              <em>Tiempo (2019)</em> ya publicados, el proyecto sigue expandiendo
-              su universo sonoro con producciones propias.
-            </p>
-            <p>
-              Composición, producción y dirección artística a cargo de{" "}
-              <strong>Alejandro Veloz</strong>.
-            </p>
+            <p>{t("bio.p4")}</p>
           </Reveal>
 
           <Reveal className="bio__media" delay={2}>
@@ -78,7 +71,7 @@ export default function Bio() {
               rel="noopener noreferrer"
               className="btn btn--ghost"
             >
-              Seguir en Instagram
+              {t("bio.followIG")}
             </a>
           )}
         </Reveal>

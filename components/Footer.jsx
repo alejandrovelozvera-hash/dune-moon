@@ -1,7 +1,11 @@
+"use client";
+
 import { NAV_LINKS, SOCIALS } from "@/lib/data";
 import SocialIcon from "./SocialIcon";
+import { useLang } from "@/lib/i18n";
 
 export default function Footer() {
+  const { t } = useLang();
   const year = new Date().getFullYear();
 
   return (
@@ -9,16 +13,13 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <span className="footer__logo display">DUNE MOON</span>
-          <p>
-            Proyecto electrónico de género Synthpop / Synthwave desde Riobamba,
-            Ecuador.
-          </p>
+          <p>{t("footer.desc")}</p>
         </div>
 
-        <nav className="footer__nav" aria-label="Pie de página">
+        <nav className="footer__nav" aria-label={t("footer.desc")}>
           {NAV_LINKS.map((link) => (
             <a key={link.href} href={link.href}>
-              {link.label}
+              {t(`nav.${link.id}`)}
             </a>
           ))}
         </nav>
@@ -41,7 +42,7 @@ export default function Footer() {
 
       <div className="container footer__bottom">
         <span>© {year} Dune Moon · Alejandro Veloz</span>
-        <span>Hecho con sintetizadores y nostalgia</span>
+        <span>{t("footer.made")}</span>
       </div>
     </footer>
   );

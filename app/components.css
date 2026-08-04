@@ -86,6 +86,39 @@
   font-size: 0.7rem;
 }
 
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav__lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 40px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
+    background 0.3s var(--ease);
+}
+
+.nav__lang:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(74, 104, 168, 0.12);
+}
+
 .nav__burger {
   display: none;
   flex-direction: column;
@@ -1712,6 +1745,11 @@
 
   .nav__burger {
     display: flex;
+  }
+
+  .nav__lang {
+    min-width: 42px;
+    height: 44px;
   }
 
   .contact__grid,

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 import { VIDEOS, SOCIALS } from "@/lib/data";
+import { useLang } from "@/lib/i18n";
 
 const THUMB_STEPS = ["maxresdefault", "hqdefault", "mqdefault"];
 
@@ -61,6 +62,7 @@ function useBestThumb(id, startStep = 0) {
 }
 
 function VideoStage({ video, playing, onPlay, thumb }) {
+  const { t } = useLang();
   const { src, tried } = thumb;
   const triedLabel = THUMB_STEPS[tried];
 
@@ -81,7 +83,7 @@ function VideoStage({ video, playing, onPlay, thumb }) {
         <button
           className="videos__stage-thumb"
           onClick={onPlay}
-          aria-label={`Reproducir: ${video.title}`}
+          aria-label={t("videos.play", { title: video.title })}
         >
           <img
             className="videos__stage-img"
@@ -95,7 +97,7 @@ function VideoStage({ video, playing, onPlay, thumb }) {
               <path d="M8 5.14v14l11-7-11-7Z" />
             </svg>
           </span>
-          <span className="videos__stage-tag">Reproducir en YouTube</span>
+          <span className="videos__stage-tag">{t("videos.playOnYT")}</span>
         </button>
       )}
       <div className="videos__stage-info">
@@ -107,6 +109,7 @@ function VideoStage({ video, playing, onPlay, thumb }) {
 }
 
 export default function Videos() {
+  const { t } = useLang();
   const youtube = SOCIALS.find((s) => s.name === "YouTube");
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -157,15 +160,12 @@ export default function Videos() {
         <Reveal>
           <p className="eyebrow">
             <span className="section-index">02</span>
-            En vivo en pantalla
+            {t("videos.eyebrow")}
           </p>
           <h2 className="section-title">
-            <span className="gradient-text">Videos</span>
+            <span className="gradient-text">{t("videos.title")}</span>
           </h2>
-          <p className="section-sub">
-            Videoclips y lyric videos oficiales. Elige una miniatura o toca
-            reproducir en la pantalla grande.
-          </p>
+          <p className="section-sub">{t("videos.sub")}</p>
         </Reveal>
       </div>
 
@@ -188,7 +188,7 @@ export default function Videos() {
             <button
               className="videos__nav"
               onClick={goPrev}
-              aria-label="Video anterior"
+              aria-label={t("videos.prev")}
             >
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="m15 18-6-6 6-6" />
@@ -223,7 +223,7 @@ export default function Videos() {
             <button
               className="videos__nav"
               onClick={goNext}
-              aria-label="Video siguiente"
+              aria-label={t("videos.next")}
             >
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="m9 18 6-6-6-6" />
@@ -241,7 +241,7 @@ export default function Videos() {
             rel="noopener noreferrer"
             className="btn btn--ghost"
           >
-            Ver todo en YouTube
+            {t("videos.all")}
           </a>
         </Reveal>
       </div>

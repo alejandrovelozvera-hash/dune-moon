@@ -5,15 +5,17 @@ import Reveal from "./Reveal";
 import Equalizer from "./Equalizer";
 import LazyEmbed from "./LazyEmbed";
 import { ARTIST_ID, DISCOGRAPHY, SOCIALS } from "@/lib/data";
+import { useLang } from "@/lib/i18n";
 
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
 const embedUrl = (id) =>
   `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
 function Embed({ id, name, height = 352 }) {
+  const { t } = useLang();
   return (
     <iframe
-      title={`${name} en Spotify`}
+      title={t("music.artistEmbed")}
       src={`https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`}
       width="100%"
       height={height}
@@ -26,6 +28,7 @@ function Embed({ id, name, height = 352 }) {
 }
 
 function ReleaseCard({ item, index }) {
+  const { t } = useLang();
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,12 +38,12 @@ function ReleaseCard({ item, index }) {
           className="release__card"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          aria-label={`${open ? "Cerrar" : "Abrir"} reproductor de ${item.name}`}
+          aria-label={open ? t("music.closePlayer", { name: item.name }) : t("music.openPlayer", { name: item.name })}
         >
           <span className="release__cover">
             <img
               src={`/covers/${item.id}.jpg`}
-              alt={`Portada de ${item.name}`}
+              alt={`${item.name}`}
               width="300"
               height="300"
               loading="lazy"
@@ -63,7 +66,7 @@ function ReleaseCard({ item, index }) {
           </div>
         )}
         <span className="release__status" aria-live="polite">
-          {open ? `Reproductor de ${item.name} abierto` : ""}
+          {open ? t("music.playerOpen", { name: item.name }) : ""}
         </span>
       </div>
     </Reveal>
@@ -71,6 +74,7 @@ function ReleaseCard({ item, index }) {
 }
 
 export default function Music() {
+  const { t } = useLang();
   const spotify = SOCIALS.find((s) => s.name === "Spotify");
   const album = DISCOGRAPHY.album;
 
@@ -78,15 +82,12 @@ export default function Music() {
     <section id="musica" className="section">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">Reproduce ahora</p>
+          <p className="eyebrow">{t("music.eyebrow")}</p>
           <h2 className="section-title section-title--eq">
-            <span className="gradient-text">Música</span>
+            <span className="gradient-text">{t("music.title")}</span>
             <Equalizer />
           </h2>
-          <p className="section-sub">
-            Top tracks, álbum, sencillos y EPs de Dune Moon. Toca una tarjeta
-            para abrir su reproductor desde Spotify sin salir de esta página.
-          </p>
+          <p className="section-sub">{t("music.sub")}</p>
         </Reveal>
       </div>
 
@@ -98,16 +99,14 @@ export default function Music() {
         />
         <div className="container music__toptracks-inner">
           <div className="music__toptracks-info">
-            <p className="eyebrow">Lo más escuchado</p>
-            <h3 className="music__toptracks-title">Top Tracks</h3>
-            <p className="music__toptracks-sub">
-              Los temas más reproducidos de Dune Moon en Spotify.
-            </p>
+            <p className="eyebrow">{t("music.toptracksEyebrow")}</p>
+            <h3 className="music__toptracks-title">{t("music.toptracksTitle")}</h3>
+            <p className="music__toptracks-sub">{t("music.toptracksSub")}</p>
           </div>
           <div className="music__artist panel">
             <LazyEmbed
               src={artistUrl}
-              title="Dune Moon en Spotify"
+              title={t("music.artistEmbed")}
               height={420}
               cover={`/covers/${album.id}.jpg`}
             />
@@ -133,7 +132,7 @@ export default function Music() {
 
         <div className="music__group">
           <Reveal className="music__group-head">
-            <h3 className="music__group-title">Sencillos</h3>
+            <h3 className="music__group-title">{t("music.singles")}</h3>
             <span className="music__group-count">
               {String(DISCOGRAPHY.singles.length).padStart(2, "0")}
             </span>
@@ -147,7 +146,7 @@ export default function Music() {
 
         <div className="music__group">
           <Reveal className="music__group-head">
-            <h3 className="music__group-title">EPs</h3>
+            <h3 className="music__group-title">{t("music.eps")}</h3>
             <span className="music__group-count">
               {String(DISCOGRAPHY.eps.length).padStart(2, "0")}
             </span>
@@ -166,7 +165,7 @@ export default function Music() {
             rel="noopener noreferrer"
             className="btn btn--ghost"
           >
-            Abrir perfil completo en Spotify
+            {t("music.openProfile")}
           </a>
         </Reveal>
       </div>

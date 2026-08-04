@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/lib/data";
+import { useLang } from "@/lib/i18n";
 
 export default function Nav() {
+  const { lang, setLanguage, t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -21,6 +23,11 @@ export default function Nav() {
     };
   }, [open]);
 
+  const links = NAV_LINKS.map((link) => ({
+    ...link,
+    label: t(`nav.${link.id}`),
+  }));
+
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="container nav__inner">
@@ -29,20 +36,31 @@ export default function Nav() {
         </a>
 
         <nav className="nav__links" aria-label="Principal">
-          {NAV_LINKS.map((link) => (
+          {links.map((link) => (
             <a key={link.href} href={link.href}>
               {link.label}
             </a>
           ))}
         </nav>
 
-        <a href="#musica" className="btn btn--primary nav__cta">
-          Escuchar
-        </a>
+        <div className="nav__right">
+          <button
+            className="nav__lang"
+            onClick={() => setLanguage(lang === "es" ? "en" : "es")}
+            aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
+            title={lang === "es" ? "Switch to English" : "Cambiar a español"}
+          >
+            {lang === "es" ? "EN" : "ES"}
+          </button>
+
+          <a href="#musica" className="btn btn--primary nav__cta">
+            {t("nav.listen")}
+          </a>
+        </div>
 
         <button
           className="nav__burger"
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? t("nav.close") : t("nav.open")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
@@ -54,7 +72,7 @@ export default function Nav() {
 
       <div className={`nav__menu ${open ? "nav__menu--open" : ""}`}>
         <nav className="nav__menu-links" aria-label="Menú móvil">
-          {NAV_LINKS.map((link, i) => (
+          {links.map((link, i) => (
             <a
               key={link.href}
               href={link.href}

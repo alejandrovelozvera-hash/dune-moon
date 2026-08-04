@@ -1,22 +1,25 @@
+"use client";
+
 import Reveal from "./Reveal";
 import SocialIcon from "./SocialIcon";
 import { SOCIALS } from "@/lib/data";
+import { useLang } from "@/lib/i18n";
 
 export default function Contact() {
+  const { t } = useLang();
+
   return (
     <section id="contacto" className="section">
       <div className="container">
         <Reveal>
           <p className="eyebrow">
             <span className="section-index">04</span>
-            Conéctate
+            {t("contact.eyebrow")}
           </p>
           <h2 className="section-title">
-            <span className="gradient-text">Sígueme</span>
+            <span className="gradient-text">{t("contact.title")}</span>
           </h2>
-          <p className="section-sub">
-            Todas las plataformas en un solo lugar. Dale play y comparte el viaje.
-          </p>
+          <p className="section-sub">{t("contact.sub")}</p>
         </Reveal>
 
           <div className="contact__grid">
@@ -45,7 +48,7 @@ export default function Contact() {
         </div>
 
         <Reveal className="contact__booking">
-          <h3 className="contact__booking-title">Contacto</h3>
+          <h3 className="contact__booking-title">{t("contact.contact")}</h3>
           <a
             href="mailto:imdunemusic@gmail.com"
             className="btn btn--primary contact__mail-btn"

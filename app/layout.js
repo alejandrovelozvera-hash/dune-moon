@@ -127,6 +127,15 @@ const jsonLd = {
       numberOfTracks: 12,
     },
   ],
+  track: [
+    {
+      "@type": "MusicRecording",
+      name: "En Mi Mente",
+      byArtist: { "@type": "MusicGroup", name: "Dune Moon" },
+      datePublished: "2026-08-15",
+      genre: ["Synthpop", "Synthwave"],
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {

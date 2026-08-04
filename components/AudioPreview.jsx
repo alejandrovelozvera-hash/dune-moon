@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLang } from "@/lib/i18n";
 
 function fmt(sec) {
   if (!Number.isFinite(sec)) return "0:00";
@@ -22,6 +23,7 @@ function Eq({ className = "" }) {
 }
 
 const AudioPreview = ({ src, title, label = "Preview" }) => {
+  const { t } = useLang();
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -72,7 +74,7 @@ const AudioPreview = ({ src, title, label = "Preview" }) => {
       <button
         className="audio-preview__play"
         onClick={toggle}
-        aria-label={playing ? `Pausar ${title}` : `Reproducir ${title}`}
+        aria-label={playing ? t("hero.audioPause", { title }) : t("hero.audioPlay", { title })}
       >
         {playing ? (
           <Eq className="eq--in-button" />

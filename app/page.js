@@ -7,10 +7,11 @@ import Videos from "@/components/Videos";
 import Bio from "@/components/Bio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { LangProvider } from "@/lib/i18n";
 
 export default function Home() {
   return (
-    <>
+    <LangProvider>
       <ScrollProgress />
       <Nav />
       <main>
@@ -22,6 +23,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </LangProvider>
   );
 }

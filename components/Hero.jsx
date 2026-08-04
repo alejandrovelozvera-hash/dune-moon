@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Starfield from "./Starfield";
 import AudioPreview from "./AudioPreview";
+import { useLang } from "@/lib/i18n";
 
 const RELEASE_DATE = new Date("2026-08-15T00:00:00");
 
@@ -22,16 +23,17 @@ function useCountdown() {
   return {
     released: diff <= 0,
     units: [
-      { label: "Días", value: pad(days) },
-      { label: "Horas", value: pad(hours) },
-      { label: "Min", value: pad(minutes) },
-      { label: "Seg", value: pad(seconds) },
+      { key: "days", value: pad(days) },
+      { key: "hours", value: pad(hours) },
+      { key: "min", value: pad(minutes) },
+      { key: "sec", value: pad(seconds) },
     ],
   };
 }
 
 function ReleaseSlide() {
   const { released, units } = useCountdown();
+  const { t } = useLang();
 
   return (
     <div className="hero__slide hero__slide--release">
@@ -40,11 +42,11 @@ function ReleaseSlide() {
         aria-hidden="true"
         style={{ backgroundImage: "url(/en-mi-mente-2026-remaster.jpg)" }}
       />
-      <p className="eyebrow hero__eyebrow">Nuevo lanzamiento · 2026</p>
+      <p className="eyebrow hero__eyebrow">{t("hero.releaseEyebrow")}</p>
 
       <div className="hero__release">
         <div className="hero__release-head">
-          <span className="hero__release-badge">Nuevo single</span>
+          <span className="hero__release-badge">{t("hero.releaseBadge")}</span>
           <h2 className="hero__release-title">
             <img
               src="/enmimentetitulo.svg"
@@ -54,14 +56,14 @@ function ReleaseSlide() {
               loading="eager"
             />
           </h2>
-          <p className="hero__release-sub">(2026 Remaster)</p>
+          <p className="hero__release-sub">{t("hero.releaseSub")}</p>
         </div>
 
         <div className="hero__release-body">
           <div className="hero__release-cover">
             <img
               src="/en-mi-mente-2026-remaster.jpg"
-              alt="Portada de En Mi Mente (2026 Remaster)"
+              alt="En Mi Mente (2026 Remaster)"
               width="800"
               height="800"
               loading="eager"
@@ -70,15 +72,15 @@ function ReleaseSlide() {
 
           <div className="hero__release-info">
             <p className="hero__release-date">
-              {released ? "Ya disponible" : "Se estrena el 15 de agosto"}
+              {released ? t("hero.released") : t("hero.releaseDate")}
             </p>
 
             {!released && (
-              <div className="hero__countdown" role="timer" aria-label="Cuenta regresiva para el estreno">
+              <div className="hero__countdown" role="timer" aria-label={t("hero.releaseDate")}>
                 {units.map((u) => (
-                  <span key={u.label} className="hero__countdown-unit">
+                  <span key={u.key} className="hero__countdown-unit">
                     <span className="hero__countdown-value">{u.value}</span>
-                    <span className="hero__countdown-label">{u.label}</span>
+                    <span className="hero__countdown-label">{t(`hero.countdown.${u.key}`)}</span>
                   </span>
                 ))}
               </div>
@@ -87,12 +89,12 @@ function ReleaseSlide() {
             <AudioPreview
               src="/en-mi-mente-preview.mp3"
               title="En Mi Mente"
-              label="Preview · Se estrena el 15 de agosto"
+              label={t("hero.previewLabel")}
             />
 
             <div className="hero__actions">
               <a href="#videos" className="btn btn--ghost">
-                Ver videos
+                {t("hero.watchVideos")}
               </a>
             </div>
           </div>
@@ -103,33 +105,32 @@ function ReleaseSlide() {
 }
 
 function MainSlide() {
+  const { t } = useLang();
+
   return (
     <div className="hero__slide hero__slide--main">
       <div className="hero__main">
         <div className="hero__main-text">
-          <p className="eyebrow hero__eyebrow">Proyecto electrónico · Riobamba, Ecuador</p>
+          <p className="eyebrow hero__eyebrow">{t("hero.mainEyebrow")}</p>
 
           <h1 className="display hero__title">
             DUNE
             <span className="gradient-text"> MOON</span>
           </h1>
 
-          <p className="hero__tag">SYNTHPOP · SYNTHWAVE</p>
+          <p className="hero__tag">{t("hero.tag")}</p>
 
-          <p className="hero__desc">
-            Música ochentera revivida con un toque actual. Un viaje sonoro entre
-            sintetizadores, nostalgia y estrellas.
-          </p>
+          <p className="hero__desc">{t("hero.desc")}</p>
 
           <div className="hero__actions">
             <a href="#musica" className="btn btn--primary">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
                 <path d="M8 5.14v14l11-7-11-7Z" />
               </svg>
-              Escuchar en Spotify
+              {t("hero.listenSpotify")}
             </a>
             <a href="#videos" className="btn btn--ghost">
-              Ver videos
+              {t("hero.watchVideos")}
             </a>
           </div>
         </div>
@@ -149,6 +150,7 @@ function MainSlide() {
 }
 
 export default function Hero() {
+  const { t } = useLang();
   const [offset, setOffset] = useState(0);
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -206,23 +208,23 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero__dots" role="tablist" aria-label="Contenido del hero">
+        <div className="hero__dots" role="tablist" aria-label={t("hero.releaseEyebrow")}>
           <button
             className={`hero__dot${slide === 0 ? " is-active" : ""}`}
             onClick={() => { setSlide(0); setPaused(false); }}
-            aria-label="Nuevo lanzamiento"
+            aria-label={t("hero.dotRelease")}
             aria-selected={slide === 0}
           />
           <button
             className={`hero__dot${slide === 1 ? " is-active" : ""}`}
             onClick={() => { setSlide(1); setPaused(false); }}
-            aria-label="Sobre Dune Moon"
+            aria-label={t("hero.dotMain")}
             aria-selected={slide === 1}
           />
         </div>
       </div>
 
-      <a href="#musica" className="hero__scroll" aria-label="Desplazarse a música">
+      <a href="#musica" className="hero__scroll" aria-label={t("hero.scroll")}>
         <span className="hero__scroll-line" />
       </a>
     </section>
