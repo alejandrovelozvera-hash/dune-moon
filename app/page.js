@@ -7,6 +7,7 @@ import Videos from "@/components/Videos";
 import Bio from "@/components/Bio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 import { LangProvider } from "@/lib/i18n";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </LangProvider>
   );
 }
