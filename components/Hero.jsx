@@ -154,6 +154,7 @@ function MainSlide() {
 export default function Hero() {
   const [offset, setOffset] = useState(0);
   const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setOffset(window.scrollY);
@@ -163,8 +164,26 @@ export default function Hero() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (paused) return undefined;
     const t = setInterval(() => setSlide((s) => (s + 1) % 2), 12000);
     return () => clearInterval(t);
+  }, [paused]);
+
+  useEffect(() => {
+    const hero = document.querySelector(".hero");
+    if (!hero) return undefined;
+    const onFocusIn = (e) => {
+      if (e.target.closest(".hero__slide--release")) setPaused(true);
+    };
+    const onFocusOut = (e) => {
+      if (e.target.closest(".hero__slide--release")) setPaused(false);
+    };
+    hero.addEventListener("focusin", onFocusIn);
+    hero.addEventListener("focusout", onFocusOut);
+    return () => {
+      hero.removeEventListener("focusin", onFocusIn);
+      hero.removeEventListener("focusout", onFocusOut);
+    };
   }, []);
 
   const parallax = Math.min(offset * 0.25, 140);
@@ -193,13 +212,13 @@ export default function Hero() {
         <div className="hero__dots" role="tablist" aria-label="Contenido del hero">
           <button
             className={`hero__dot${slide === 0 ? " is-active" : ""}`}
-            onClick={() => setSlide(0)}
+            onClick={() => { setSlide(0); setPaused(false); }}
             aria-label="Nuevo lanzamiento"
             aria-selected={slide === 0}
           />
           <button
             className={`hero__dot${slide === 1 ? " is-active" : ""}`}
-            onClick={() => setSlide(1)}
+            onClick={() => { setSlide(1); setPaused(false); }}
             aria-label="Sobre Dune Moon"
             aria-selected={slide === 1}
           />
