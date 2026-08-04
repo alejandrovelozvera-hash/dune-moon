@@ -87,7 +87,7 @@ function ReleaseSlide() {
             <AudioPreview
               src="/en-mi-mente-preview.mp3"
               title="En Mi Mente"
-              label="Preview · Se estrena el 15 de agosto"
+              label="Preview 30s · Se estrena el 15 de agosto"
             />
 
             <div className="hero__actions">
