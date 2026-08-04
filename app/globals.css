@@ -149,11 +149,11 @@ iframe {
 }
 
 .gradient-text {
-  color: transparent;
-  background: linear-gradient(100deg, var(--cyan) 0%, var(--violet) 55%, var(--magenta) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text);
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: currentColor;
 }
 
 .eyebrow {
