@@ -2,7 +2,7 @@ import "./globals.css";
 import "./components.css";
 
 export const metadata = {
-  metadataBase: new URL("https://dune-moon.vercel.app"),
+  metadataBase: new URL("https://dunemoon.vercel.app"),
   title: {
     default: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
     template: "%s · Dune Moon",
@@ -25,7 +25,7 @@ export const metadata = {
     "álbum Tiempo",
     "En Mi Mente",
   ],
-  authors: [{ name: "Luis Alejandro Veloz Vera", url: "https://dune-moon.vercel.app" }],
+  authors: [{ name: "Luis Alejandro Veloz Vera", url: "https://dunemoon.vercel.app" }],
   creator: "Dune Moon",
   publisher: "Dune Moon",
   category: "Música",
@@ -39,7 +39,7 @@ export const metadata = {
     type: "website",
     siteName: "Dune Moon",
     locale: "es_EC",
-    url: "https://dune-moon.vercel.app",
+    url: "https://dunemoon.vercel.app",
     images: [
       {
         url: "/og-image.jpg",
@@ -108,7 +108,7 @@ const jsonLd = {
     familyName: "Veloz Vera",
     jobTitle: "Compositor, productor y director artístico",
   },
-  url: "https://dune-moon.vercel.app",
+  url: "https://dunemoon.vercel.app",
   sameAs: [
     "https://open.spotify.com/artist/1FTaP61WmZlwN4mGyuYGmG",
     "https://www.youtube.com/@dunemoonmusic",
