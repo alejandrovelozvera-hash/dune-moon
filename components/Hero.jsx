@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Starfield from "./Starfield";
-import AudioPreview from "./AudioPreview";
+import AudioPreview, { Eq } from "./AudioPreview";
 
 const RELEASE_DATE = new Date("2026-08-15T00:00:00");
 
@@ -32,6 +32,8 @@ function useCountdown() {
 
 function ReleaseSlide() {
   const { released, units } = useCountdown();
+  const previewRef = useRef(null);
+  const [previewPlaying, setPreviewPlaying] = useState(false);
 
   return (
     <div className="hero__slide hero__slide--release">
@@ -85,18 +87,25 @@ function ReleaseSlide() {
             )}
 
             <AudioPreview
+              ref={previewRef}
               src="/en-mi-mente-preview.mp3"
               title="En Mi Mente"
               label="Preview 30s · Se estrena el 15 de agosto"
+              onPlayingChange={setPreviewPlaying}
             />
 
             <div className="hero__actions">
-              <a href="#musica" className="btn btn--primary">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5.14v14l11-7-11-7Z" />
-                </svg>
-                Escuchar en Spotify
-              </a>
+              <button
+                className={`btn btn--primary${previewPlaying ? " is-playing" : ""}`}
+                onClick={() => previewRef.current?.toggle()}
+              >
+                {previewPlaying ? <Eq className="eq--in-btn" /> : (
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 5.14v14l11-7-11-7Z" />
+                  </svg>
+                )}
+                {previewPlaying ? "Pausar preview" : "Escuchar preview"}
+              </button>
               <a href="#videos" className="btn btn--ghost">
                 Ver videos
               </a>
