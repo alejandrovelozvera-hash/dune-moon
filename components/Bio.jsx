@@ -9,12 +9,17 @@ export default function Bio() {
   const instagram = SOCIALS.find((s) => s.name === "Instagram");
   const singles = DISCOGRAPHY.singles.length;
   const eps = DISCOGRAPHY.eps.length;
+  const albumTracks = DISCOGRAPHY.album.tracks;
+  const singlesTracks = DISCOGRAPHY.singles.length;
+  const epsTracks = DISCOGRAPHY.eps.reduce((sum, ep) => sum + (ep.tracks ?? 0), 0);
+  const totalTracks = albumTracks + singlesTracks + epsTracks;
 
   const STATS = [
     { value: "2015", label: t("bio.statActive") },
     { value: "01", label: t("bio.statAlbum") },
-    { value: "04", label: t("bio.statSingles") },
-    { value: "03", label: t("bio.statEps") },
+    { value: String(singles).padStart(2, "0"), label: t("bio.statSingles") },
+    { value: String(eps).padStart(2, "0"), label: t("bio.statEps") },
+    { value: String(totalTracks).padStart(2, "0"), label: t("bio.statTracks") },
   ];
 
   return (
