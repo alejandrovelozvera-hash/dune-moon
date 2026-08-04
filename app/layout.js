@@ -1,5 +1,6 @@
 import "./globals.css";
 import "./components.css";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   metadataBase: new URL("https://dunemoon.vercel.app"),
@@ -140,6 +141,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );

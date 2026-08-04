@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Starfield from "./Starfield";
 import AudioPreview from "./AudioPreview";
+import NotifyForm from "./NotifyForm";
 
 const RELEASE_DATE = new Date("2026-08-15T00:00:00");
 
@@ -90,6 +91,8 @@ function ReleaseSlide() {
               label="Preview · Se estrena el 15 de agosto"
             />
 
+            {!released && <NotifyForm />}
+
             <div className="hero__actions">
               <a href="#videos" className="btn btn--ghost">
                 Ver videos
@@ -136,7 +139,7 @@ function MainSlide() {
 
         <div className="hero__main-logo" aria-hidden="true">
           <img
-            src="/favicon.svg"
+            src="/logo2026.svg"
             alt=""
             width="800"
             height="800"
