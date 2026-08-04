@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Starfield from "./Starfield";
 import AudioPreview from "./AudioPreview";
-import NotifyForm from "./NotifyForm";
 
 const RELEASE_DATE = new Date("2026-08-15T00:00:00");
 
@@ -90,8 +89,6 @@ function ReleaseSlide() {
               title="En Mi Mente"
               label="Preview · Se estrena el 15 de agosto"
             />
-
-            {!released && <NotifyForm />}
 
             <div className="hero__actions">
               <a href="#videos" className="btn btn--ghost">
