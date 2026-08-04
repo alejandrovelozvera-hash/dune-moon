@@ -103,35 +103,45 @@ function ReleaseSlide() {
 
 function MainSlide() {
   return (
-    <div className="hero__slide">
-      <p className="eyebrow hero__eyebrow">Proyecto electrónico · Riobamba, Ecuador</p>
+    <div className="hero__slide hero__slide--main">
+      <div className="hero__main">
+        <div className="hero__main-text">
+          <p className="eyebrow hero__eyebrow">Proyecto electrónico · Riobamba, Ecuador</p>
 
-      <h1 className="display hero__title">
-        DUNE
-        <span className="gradient-text"> MOON</span>
-      </h1>
+          <h1 className="display hero__title">
+            DUNE
+            <span className="gradient-text"> MOON</span>
+          </h1>
 
-      <p className="hero__tag">SYNTHPOP · SYNTHWAVE</p>
+          <p className="hero__tag">SYNTHPOP · SYNTHWAVE</p>
 
-      <p className="hero__desc">
-        Música ochentera revivida con un toque actual. Un viaje sonoro entre
-        sintetizadores, nostalgia y estrellas.
-      </p>
+          <p className="hero__desc">
+            Música ochentera revivida con un toque actual. Un viaje sonoro entre
+            sintetizadores, nostalgia y estrellas.
+          </p>
 
-      <div className="hero__actions">
-        <a href="#musica" className="btn btn--primary">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-            <path d="M8 5.14v14l11-7-11-7Z" />
-          </svg>
-          Escuchar en Spotify
-        </a>
-        <a href="#videos" className="btn btn--ghost">
-          Ver videos
-        </a>
-      </div>
+          <div className="hero__actions">
+            <a href="#musica" className="btn btn--primary">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.14v14l11-7-11-7Z" />
+              </svg>
+              Escuchar en Spotify
+            </a>
+            <a href="#videos" className="btn btn--ghost">
+              Ver videos
+            </a>
+          </div>
+        </div>
 
-      <div className="hero__meta">
-        <span>Disponible en todas las plataformas</span>
+        <div className="hero__main-logo" aria-hidden="true">
+          <img
+            src="/favicon.svg"
+            alt=""
+            width="800"
+            height="800"
+            loading="eager"
+          />
+        </div>
       </div>
     </div>
   );
