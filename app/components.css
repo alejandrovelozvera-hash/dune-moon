@@ -511,6 +511,95 @@
   color: var(--text-faint);
 }
 
+/* audio preview */
+.audio-preview {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  max-width: 460px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+}
+
+.audio-preview__play {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--navy-light);
+  background: var(--navy);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.audio-preview__play:hover {
+  transform: scale(1.06);
+  background: var(--navy-light);
+  box-shadow: 0 0 0 6px rgba(74, 104, 168, 0.15), 0 0 24px rgba(74, 104, 168, 0.35);
+}
+
+.audio-preview__play.is-playing {
+  animation: pulse-dot 1.6s var(--ease) infinite;
+}
+
+.audio-preview__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.audio-preview__title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+.audio-preview__label {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.audio-preview__bar {
+  position: relative;
+  margin-top: 12px;
+  height: 6px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.audio-preview__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--navy-light), var(--cyan));
+}
+
+.audio-preview__time {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
 /* dots */
 .hero__dots {
   margin-top: 46px;
@@ -596,7 +685,8 @@
 .hero__release-title,
 .hero__release-sub,
 .hero__release-date,
-.hero__countdown {
+.hero__countdown,
+.audio-preview {
   opacity: 0;
   animation: hero-in 1s var(--ease) forwards;
 }
@@ -614,6 +704,7 @@
 .hero__release-sub { animation-delay: 0.42s; }
 .hero__release-date { animation-delay: 0.52s; }
 .hero__countdown { animation-delay: 0.62s; }
+.audio-preview { animation-delay: 0.7s; }
 
 @keyframes hero-in {
   from {
@@ -1688,6 +1779,11 @@
   .hero__countdown-unit {
     min-width: 58px;
     padding: 10px 12px;
+  }
+
+  .audio-preview {
+    margin-top: 22px;
+    max-width: 100%;
   }
 
   .hero__dots {

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Starfield from "./Starfield";
+import AudioPreview from "./AudioPreview";
 
 const RELEASE_DATE = new Date("2026-08-15T00:00:00");
 
@@ -83,6 +84,12 @@ function ReleaseSlide() {
               </div>
             )}
 
+            <AudioPreview
+              src="/en-mi-mente-preview.mp3"
+              title="En Mi Mente"
+              label="Preview · Se estrena el 15 de agosto"
+            />
+
             <div className="hero__actions">
               <a href="#musica" className="btn btn--primary">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
@@ -159,7 +166,7 @@ export default function Hero() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setSlide((s) => (s + 1) % 2), 7000);
+    const t = setInterval(() => setSlide((s) => (s + 1) % 2), 12000);
     return () => clearInterval(t);
   }, []);
 
