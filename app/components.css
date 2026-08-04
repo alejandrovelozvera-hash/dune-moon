@@ -625,22 +625,9 @@
   width: 2.5px;
 }
 
-.eq--in-btn {
-  height: 16px;
-}
-
 .audio-preview__play.is-playing {
   animation: pulse-dot 1.6s var(--ease) infinite;
   color: var(--cyan);
-}
-
-.btn--primary.is-playing {
-  background: var(--navy-light);
-}
-
-.btn--primary.is-playing svg,
-.btn--primary.is-playing .eq {
-  animation: none;
 }
 
 /* dots */

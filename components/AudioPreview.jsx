@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function fmt(sec) {
   if (!Number.isFinite(sec)) return "0:00";
@@ -21,10 +21,7 @@ function Eq({ className = "" }) {
   );
 }
 
-const AudioPreview = forwardRef(function AudioPreview(
-  { src, title, label = "Preview", onPlayingChange },
-  ref
-) {
+const AudioPreview = ({ src, title, label = "Preview" }) => {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -46,24 +43,17 @@ const AudioPreview = forwardRef(function AudioPreview(
     };
   }, []);
 
-  const setPlayingState = (next) => {
-    setPlaying(next);
-    if (onPlayingChange) onPlayingChange(next);
-  };
-
   const toggle = () => {
     const a = audioRef.current;
     if (!a) return;
     if (playing) {
       a.pause();
-      setPlayingState(false);
+      setPlaying(false);
     } else {
       a.play();
-      setPlayingState(true);
+      setPlaying(true);
     }
   };
-
-  useImperativeHandle(ref, () => ({ toggle, playing: () => playing }));
 
   const seek = (e) => {
     const a = audioRef.current;
@@ -112,7 +102,7 @@ const AudioPreview = forwardRef(function AudioPreview(
       </div>
     </div>
   );
-});
+}
 
 export { Eq };
 export default AudioPreview;
