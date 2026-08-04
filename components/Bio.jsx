@@ -57,16 +57,16 @@ export default function Bio() {
               loading="lazy"
             />
           </Reveal>
-
-          <Reveal className="bio__stats panel" delay={3}>
-            {STATS.map((s) => (
-              <div key={s.label} className="bio__stat">
-                <span className="bio__stat-value gradient-text display">{s.value}</span>
-                <span className="bio__stat-label">{s.label}</span>
-              </div>
-            ))}
-          </Reveal>
         </div>
+
+        <Reveal className="bio__stats panel" delay={3}>
+          {STATS.map((s) => (
+            <div key={s.label} className="bio__stat">
+              <span className="bio__stat-value gradient-text display">{s.value}</span>
+              <span className="bio__stat-label">{s.label}</span>
+            </div>
+          ))}
+        </Reveal>
 
         <Reveal className="bio__socials" delay={4}>
           {instagram && (

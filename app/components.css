@@ -1446,9 +1446,9 @@
 .bio__layout {
   margin-top: 48px;
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr) minmax(0, 1fr);
-  gap: 26px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
 }
 
 .bio__media {
@@ -1457,6 +1457,9 @@
   border-radius: 18px;
   border: 1px solid var(--border-strong);
   box-shadow: 0 30px 70px rgba(4, 8, 18, 0.5);
+  max-width: 420px;
+  justify-self: center;
+  width: 100%;
 }
 
 .bio__photo {
@@ -1485,32 +1488,35 @@
 }
 
 .bio__stats {
-  padding: 34px;
+  margin-top: 56px;
+  padding: 34px 40px;
   display: grid;
-  gap: 26px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: center;
 }
 
 .bio__stat {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 14px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid var(--border);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding-inline: 12px;
 }
 
-.bio__stat:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+.bio__stat + .bio__stat {
+  border-left: 1px solid var(--border);
 }
 
 .bio__stat-value {
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
   letter-spacing: 0.02em;
 }
 
 .bio__stat-label {
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-faint);
@@ -1756,6 +1762,15 @@
   .music__toptracks-inner,
   .bio__layout {
     grid-template-columns: 1fr;
+  }
+
+  .bio__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 16px;
+  }
+
+  .bio__stat:nth-child(3n + 1) {
+    border-left: none;
   }
 
   .music__toptracks {
@@ -2044,17 +2059,24 @@
     flex-direction: column;
   }
 
-  /* Lectura móvil: stats apiladas y foto limitada */
+  /* Lectura móvil: stats en 2 columnas y foto limitada */
   .section-sub {
     font-size: 1rem;
     line-height: 1.75;
   }
 
+  .bio__stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 12px;
+    padding: 26px 20px;
+  }
+
   .bio__stat {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    padding-bottom: 18px;
+    padding-inline: 8px;
+  }
+
+  .bio__stat:nth-child(odd) {
+    border-left: none;
   }
 
   .bio__photo {
