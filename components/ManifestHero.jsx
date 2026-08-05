@@ -1,5 +1,6 @@
 "use client";
 
+import AudioPreview from "./AudioPreview";
 import { useLang } from "@/lib/i18n";
 
 const PARAGRAPHS = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"];
@@ -10,22 +11,24 @@ export default function ManifestHero() {
   return (
     <article className="manifest">
       <div className="container">
-        <p className="eyebrow">
-          <span className="section-index">★</span>
-          {t("manifest.eyebrow")}
-        </p>
-        <h1 className="manifesto__title">
-          <span className="gradient-text">{t("manifest.title")}</span>
-        </h1>
-        <p className="manifesto__subtitle">{t("manifest.subtitle")}</p>
+        <header className="manifesto__header">
+          <p className="eyebrow">
+            <span className="section-index">★</span>
+            {t("manifest.eyebrow")}
+          </p>
+          <h1 className="manifesto__title">
+            <span className="gradient-text">{t("manifest.title")}</span>
+          </h1>
+          <p className="manifesto__subtitle">{t("manifest.subtitle")}</p>
 
-        <div className="manifesto__byline">
-          <span className="manifesto__byline-name">{t("manifest.byline")}</span>
-          <span className="manifesto__byline-song">{t("manifest.song")}</span>
-        </div>
+          <div className="manifesto__byline">
+            <span className="manifesto__byline-name">{t("manifest.byline")}</span>
+            <span className="manifesto__byline-song">{t("manifest.song")}</span>
+          </div>
+        </header>
 
-        <div className="manifesto__body">
-          <div className="manifesto__hero">
+        <div className="manifesto__layout">
+          <aside className="manifesto__rail">
             <div className="manifesto__hero-cover">
               <img
                 src="/en-mi-mente-2026-remaster.jpg"
@@ -35,19 +38,21 @@ export default function ManifestHero() {
                 loading="eager"
               />
             </div>
-            <div className="manifesto__hero-aside">
-              <p className="manifesto__hero-tag">{t("manifest.song")}</p>
-              <p className="manifesto__hero-quote">
-                {t("manifest.subtitle")}
-              </p>
-            </div>
-          </div>
+            <AudioPreview
+              src="/en-mi-mente-preview.mp3"
+              title={t("manifest.song")}
+              label={t("hero.previewLabel")}
+            />
+            <p className="manifesto__hero-tag">{t("manifest.song")}</p>
+          </aside>
 
-          {PARAGRAPHS.map((key, i) => (
-            <p key={key} className="manifesto__text">
-              {t(`manifest.${key}`)}
-            </p>
-          ))}
+          <div className="manifesto__body">
+            {PARAGRAPHS.map((key, i) => (
+              <p key={key} className="manifesto__text">
+                {t(`manifest.${key}`)}
+              </p>
+            ))}
+          </div>
         </div>
 
         <div className="manifesto__video">
