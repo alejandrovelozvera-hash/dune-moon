@@ -95,6 +95,9 @@ function ReleaseSlide() {
             />
 
             <div className="hero__actions">
+              <a href="/manifiesto" className="btn btn--primary">
+                {t("hero.readStory")}
+              </a>
               <a href="#videos" className="btn btn--ghost">
                 {t("hero.watchVideos")}
               </a>
