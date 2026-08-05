@@ -818,7 +818,7 @@
 
 /* ================= SECTION COMMON / MUSIC ================= */
 #musica {
-  padding-top: clamp(16px, 4vw, 32px);
+  padding-top: 0;
 }
 .section-index {
   display: inline-flex;
