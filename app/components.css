@@ -2197,7 +2197,7 @@
 
 .manifest {
   padding-top: 160px;
-  padding-bottom: clamp(80px, 12vw, 150px);
+  padding-bottom: 0;
 }
 
 .manifest .eyebrow {
@@ -2346,7 +2346,7 @@
 }
 
 .manifesto__video-band {
-  margin-top: 96px;
+  margin-top: 0;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   padding-block: clamp(48px, 7vw, 72px);
