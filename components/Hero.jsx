@@ -199,7 +199,7 @@ export default function Hero() {
     };
   }, []);
 
-  const parallax = isMobile ? 0 : Math.min(offset * 0.25, 140);
+  const parallax = Math.min(offset * 0.25, 140);
 
   return (
     <section id="top" className="hero">
