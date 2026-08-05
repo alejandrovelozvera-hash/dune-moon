@@ -82,7 +82,10 @@ export default function Music() {
     <section id="musica" className="section">
       <div className="container">
         <Reveal>
-          <p className="eyebrow">{t("music.eyebrow")}</p>
+          <p className="eyebrow">
+            <span className="section-index">01</span>
+            {t("music.eyebrow")}
+          </p>
           <h2 className="section-title section-title--eq">
             <span className="gradient-text">{t("music.title")}</span>
             <Equalizer />
