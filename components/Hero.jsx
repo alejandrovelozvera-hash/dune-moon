@@ -157,8 +157,17 @@ function MainSlide() {
 export default function Hero() {
   const { t } = useLang();
   const [offset, setOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const onChange = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setOffset(window.scrollY);
@@ -190,7 +199,7 @@ export default function Hero() {
     };
   }, []);
 
-  const parallax = Math.min(offset * 0.25, 140);
+  const parallax = isMobile ? 0 : Math.min(offset * 0.25, 140);
 
   return (
     <section id="top" className="hero">
