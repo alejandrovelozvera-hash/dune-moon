@@ -424,6 +424,14 @@
   flex: 1;
 }
 
+.hero__release-desc {
+  margin-top: 24px;
+  max-width: 520px;
+  color: var(--text-dim);
+  font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+  line-height: 1.75;
+}
+
 .hero__release-badge {
   display: inline-flex;
   align-items: center;

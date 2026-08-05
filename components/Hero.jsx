@@ -86,6 +86,8 @@ function ReleaseSlide() {
               </div>
             )}
 
+            <p className="hero__release-desc">{t("hero.releaseDesc")}</p>
+
             <AudioPreview
               src="/en-mi-mente-preview.mp3"
               title="En Mi Mente"
