@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Reveal from "./Reveal";
-import Equalizer from "./Equalizer";
 import LazyEmbed from "./LazyEmbed";
 import { ARTIST_ID, DISCOGRAPHY, SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
@@ -80,20 +79,6 @@ export default function Music() {
 
   return (
     <section id="musica" className="section">
-      <div className="container">
-        <Reveal>
-          <p className="eyebrow">
-            <span className="section-index">01</span>
-            {t("music.toptracksEyebrow")}
-          </p>
-          <h2 className="section-title section-title--eq">
-            <span className="gradient-text">{t("music.title")}</span>
-            <Equalizer />
-          </h2>
-          <p className="section-sub">{t("music.sub")}</p>
-        </Reveal>
-      </div>
-
       <Reveal className="music__toptracks">
         <div
           className="music__toptracks-bg"
@@ -101,6 +86,16 @@ export default function Music() {
           style={{ backgroundImage: `url(/covers/${album.id}.jpg)` }}
         />
         <div className="container music__toptracks-inner">
+          <div className="music__toptracks-info">
+            <p className="eyebrow">
+              <span className="section-index">01</span>
+              {t("music.toptracksEyebrow")}
+            </p>
+            <h2 className="music__toptracks-title">
+              <span className="gradient-text">{t("music.title")}</span>
+            </h2>
+            <p className="music__toptracks-sub">{t("music.sub")}</p>
+          </div>
           <div className="music__artist panel">
             <LazyEmbed
               src={artistUrl}
