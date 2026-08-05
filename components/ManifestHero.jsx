@@ -27,33 +27,37 @@ export default function ManifestHero() {
           </div>
         </header>
 
-        <div className="manifesto__layout">
-          <aside className="manifesto__rail">
-            <div className="manifesto__hero-cover">
-              <img
-                src="/en-mi-mente-2026-remaster.jpg"
-                alt="En Mi Mente (2026 Remaster)"
-                width="800"
-                height="800"
-                loading="eager"
-              />
-            </div>
+        <div className="manifesto__hero">
+          <div className="manifesto__hero-cover">
+            <img
+              src="/en-mi-mente-2026-remaster.jpg"
+              alt="En Mi Mente (2026 Remaster)"
+              width="800"
+              height="800"
+              loading="eager"
+            />
+          </div>
+          <div className="manifesto__hero-side">
+            <p className="manifesto__hero-tag">{t("manifest.song")}</p>
+            <p className="manifesto__hero-quote">{t("manifest.subtitle")}</p>
             <AudioPreview
               src="/en-mi-mente-preview.mp3"
               title={t("manifest.song")}
               label={t("hero.previewLabel")}
             />
-            <p className="manifesto__hero-tag">{t("manifest.song")}</p>
-          </aside>
-
-          <div className="manifesto__body">
-            {PARAGRAPHS.map((key, i) => (
-              <p key={key} className="manifesto__text">
-                {t(`manifest.${key}`)}
-              </p>
-            ))}
           </div>
         </div>
+      </div>
+
+      <section className="manifesto__story">
+        <div className="container manifesto__body">
+          {PARAGRAPHS.map((key, i) => (
+            <p key={key} className="manifesto__text">
+              {t(`manifest.${key}`)}
+            </p>
+          ))}
+        </div>
+      </section>
 
         <div className="manifesto__video-band">
           <div className="container">
@@ -73,7 +77,6 @@ export default function ManifestHero() {
             <p className="manifesto__video-desc">{t("manifest.videoDesc")}</p>
           </div>
         </div>
-      </div>
     </article>
   );
 }
