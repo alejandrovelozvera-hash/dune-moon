@@ -2314,16 +2314,6 @@
   width: 100%;
 }
 
-.manifesto__share {
-  margin-top: 24px;
-}
-
-.manifesto__share .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
 .manifesto__story {
   margin-top: 96px;
   width: 100vw;
