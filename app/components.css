@@ -377,7 +377,7 @@
   content: "";
   width: 34px;
   height: 1px;
-  background: linear-gradient(90deg, var(--magenta), transparent);
+  background: linear-gradient(90deg, var(--cyan), transparent);
 }
 
 /* release slide */
@@ -968,7 +968,7 @@
   height: 1px;
   margin-right: 14px;
   vertical-align: middle;
-  background: linear-gradient(90deg, var(--magenta), transparent);
+  background: linear-gradient(90deg, var(--cyan), transparent);
 }
 
 .music__group-count {
