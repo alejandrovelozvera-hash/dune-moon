@@ -817,6 +817,9 @@
 }
 
 /* ================= SECTION COMMON / MUSIC ================= */
+#musica {
+  padding-top: clamp(16px, 4vw, 32px);
+}
 .section-index {
   display: inline-flex;
   align-items: center;
@@ -872,7 +875,7 @@
 
 .music__toptracks {
   position: relative;
-  margin-top: 48px;
+  margin-top: 0;
   padding-block: 56px;
   width: 100vw;
   left: 50%;
