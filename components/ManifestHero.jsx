@@ -11,6 +11,13 @@ export default function ManifestHero() {
 
   return (
     <article className="manifest">
+      <div className="manifesto__decoration" aria-hidden="true">
+        <img
+          src="/covid.webp"
+          alt=""
+          loading="lazy"
+        />
+      </div>
       <div className="container">
         <Reveal>
           <header className="manifesto__header">
