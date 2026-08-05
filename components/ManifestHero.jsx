@@ -55,21 +55,23 @@ export default function ManifestHero() {
           </div>
         </div>
 
-        <div className="manifesto__video">
-          <h2 className="manifesto__video-title">{t("manifest.videoTitle")}</h2>
-          <div className="manifesto__video-frame">
-            <iframe
-              src="https://www.youtube.com/embed/gP3VSQ-TSlI"
-              title={t("manifest.videoTitle")}
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-            />
+        <div className="manifesto__video-band">
+          <div className="container">
+            <h2 className="manifesto__video-title">{t("manifest.videoTitle")}</h2>
+            <div className="manifesto__video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/gP3VSQ-TSlI"
+                title={t("manifest.videoTitle")}
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
+            <p className="manifesto__video-desc">{t("manifest.videoDesc")}</p>
           </div>
-          <p className="manifesto__video-desc">{t("manifest.videoDesc")}</p>
         </div>
       </div>
     </article>

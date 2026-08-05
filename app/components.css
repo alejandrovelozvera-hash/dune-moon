@@ -2308,22 +2308,41 @@
 }
 
 .manifesto__body {
-  max-width: 640px;
+  max-width: 720px;
+  column-count: 2;
+  column-gap: clamp(32px, 4vw, 48px);
 }
 
 .manifesto__text {
-  margin-bottom: 26px;
+  break-inside: avoid;
+  margin-bottom: 24px;
   color: var(--text);
-  font-size: clamp(1rem, 1.5vw, 1.1rem);
-  line-height: 1.85;
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  line-height: 1.8;
+  text-align: justify;
+  hyphens: auto;
 }
 
-.manifesto__video {
-  margin-top: 72px;
-  padding: clamp(28px, 5vw, 48px);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  background: rgba(10, 14, 30, 0.35);
+.manifesto__text:first-child::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.1em;
+  line-height: 0.85;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--cyan);
+}
+
+.manifesto__video-band {
+  margin-top: 96px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-block: clamp(48px, 7vw, 72px);
+  border-block: 1px solid var(--border);
+  background: radial-gradient(circle at 50% 0%, rgba(17, 26, 51, 0.65), rgba(7, 11, 24, 0.4));
+}
+
+.manifesto__video-band .container {
+  text-align: center;
 }
 
 .manifesto__video-title {
@@ -2332,7 +2351,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .manifesto__video-frame {
@@ -2340,6 +2359,7 @@
   width: 100%;
   max-width: 880px;
   aspect-ratio: 16 / 9;
+  margin-inline: auto;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border-strong);
@@ -2348,7 +2368,7 @@
 }
 
 .manifesto__video-desc {
-  margin-top: 26px;
+  margin: 28px auto 0;
   max-width: 640px;
   color: var(--text-dim);
   font-size: 0.98rem;
@@ -2390,7 +2410,12 @@
     flex-shrink: 0;
   }
 
-  .manifesto__video {
+  .manifesto__body {
+    column-count: 1;
+    text-align: left;
+  }
+
+  .manifesto__video-band {
     padding-block: 40px;
   }
 }
