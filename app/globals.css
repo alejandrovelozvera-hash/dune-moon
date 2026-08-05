@@ -10,7 +10,7 @@
   --text-faint: #7e8aa8;
   --navy: #334677;
   --navy-light: #4a68a8;
-  --cyan: #2ec5ff;
+  --cyan: #6fb4ce;
   --magenta: #ff4fd8;
   --violet: #8a5cff;
   --sun: #ff6ac1;
@@ -19,7 +19,7 @@
   --font-body: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
   --radius: 18px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --glow-cyan: 0 0 40px rgba(46, 197, 255, 0.4);
+  --glow-cyan: 0 0 40px rgba(111, 180, 206, 0.4);
   --glow-magenta: 0 0 40px rgba(255, 79, 216, 0.35);
 }
 
@@ -174,7 +174,7 @@ iframe {
   height: 8px;
   border-radius: 50%;
   background: var(--cyan);
-  box-shadow: 0 0 10px rgba(46, 197, 255, 0.6);
+  box-shadow: 0 0 10px rgba(111, 180, 206, 0.6);
 }
 
 .section-title {
@@ -222,7 +222,7 @@ iframe {
   background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
   border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
-    0 0 30px rgba(46, 197, 255, 0.45),
+    0 0 30px rgba(111, 180, 206, 0.45),
     0 0 60px rgba(138, 92, 255, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
@@ -231,7 +231,7 @@ iframe {
   transform: translateY(-3px);
   background: linear-gradient(135deg, #56d6ff 0%, #a279ff 100%);
   box-shadow:
-    0 0 50px rgba(46, 197, 255, 0.65),
+    0 0 50px rgba(111, 180, 206, 0.65),
     0 0 90px rgba(138, 92, 255, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
@@ -247,7 +247,7 @@ iframe {
 .btn--ghost:hover {
   transform: translateY(-3px);
   border-color: var(--cyan);
-  background: rgba(46, 197, 255, 0.1);
+  background: rgba(111, 180, 206, 0.1);
   box-shadow:
     var(--glow-cyan),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
