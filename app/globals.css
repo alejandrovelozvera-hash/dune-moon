@@ -170,9 +170,11 @@ iframe {
 
 .eyebrow::before {
   content: "";
-  width: 32px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--cyan), transparent);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(46, 197, 255, 0.6);
 }
 
 .section-title {

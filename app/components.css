@@ -185,7 +185,7 @@
   display: inline-block;
   margin-right: 14px;
   font-size: 0.6em;
-  color: var(--magenta);
+  color: var(--cyan);
   vertical-align: super;
 }
 
@@ -964,11 +964,13 @@
 .music__group-title::before {
   content: "";
   display: inline-block;
-  width: 24px;
-  height: 1px;
+  width: 8px;
+  height: 8px;
   margin-right: 14px;
+  border-radius: 50%;
   vertical-align: middle;
-  background: linear-gradient(90deg, var(--cyan), transparent);
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(46, 197, 255, 0.6);
 }
 
 .music__group-count {
