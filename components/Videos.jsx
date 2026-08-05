@@ -228,21 +228,19 @@ export default function Videos() {
               </svg>
             </button>
           </div>
+
+          <div className="videos__cta">
+            <a
+              href={youtube.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--ghost"
+            >
+              {t("videos.all")}
+            </a>
+          </div>
         </div>
       </Reveal>
-
-      <div className="container">
-        <Reveal className="videos__cta" delay={2}>
-          <a
-            href={youtube.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn--ghost"
-          >
-            {t("videos.all")}
-          </a>
-        </Reveal>
-      </div>
     </section>
   );
 }
