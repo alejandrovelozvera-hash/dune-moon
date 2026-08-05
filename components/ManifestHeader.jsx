@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/i18n";
 
 export default function ManifestHeader() {
-  const { lang, setLanguage, t } = useLang();
+  const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -22,14 +22,6 @@ export default function ManifestHeader() {
         </a>
 
         <div className="nav__right">
-          <button
-            type="button"
-            className="nav__lang-btn"
-            onClick={() => setLanguage(lang === "es" ? "en" : "es")}
-            aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
-          >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
           <a href="/" className="btn btn--primary nav__cta">
             {t("manifest.back")}
           </a>

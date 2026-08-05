@@ -1,13 +1,11 @@
 "use client";
 
-import { SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
 const PARAGRAPHS = ["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8"];
 
 export default function ManifestHero() {
   const { t } = useLang();
-  const spotify = SOCIALS.find((s) => s.name === "Spotify");
 
   return (
     <article className="manifest">
@@ -68,19 +66,6 @@ export default function ManifestHero() {
           </div>
           <p className="manifesto__video-desc">{t("manifest.videoDesc")}</p>
         </div>
-
-        {spotify && (
-          <div className="manifesto__cta">
-            <a
-              href={spotify.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn--primary"
-            >
-              {t("manifest.listen")}
-            </a>
-          </div>
-        )}
       </div>
     </article>
   );

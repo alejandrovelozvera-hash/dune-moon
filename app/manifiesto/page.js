@@ -1,6 +1,7 @@
 import ManifestHeader from "@/components/ManifestHeader";
 import LangBar from "@/components/LangBar";
 import ManifestHero from "@/components/ManifestHero";
+import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { LangProvider } from "@/lib/i18n";
 
@@ -18,6 +19,7 @@ export default function ManifiestoPage() {
       <main>
         <ManifestHero />
       </main>
+      <Footer />
       <BackToTop />
     </LangProvider>
   );
