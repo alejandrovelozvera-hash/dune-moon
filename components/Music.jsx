@@ -102,7 +102,7 @@ export default function Music() {
         />
         <div className="container music__toptracks-inner">
           <div className="music__toptracks-info">
-            <p className="eyebrow">{t("music.toptracksEyebrow")}</p>
+            <p className="music__toptracks-label">{t("music.toptracksEyebrow")}</p>
             <h3 className="music__toptracks-title">{t("music.toptracksTitle")}</h3>
             <p className="music__toptracks-sub">{t("music.toptracksSub")}</p>
           </div>
