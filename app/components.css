@@ -2196,26 +2196,8 @@
 }
 
 .manifest {
-  padding-bottom: 0;
-}
-
-.manifesto__top {
-  position: relative;
   padding-top: 160px;
-  padding-bottom: clamp(40px, 8vw, 72px);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  background: linear-gradient(100deg, #340d1e 0%, #510018 55%, #5f0023 100%);
-  overflow: hidden;
-}
-
-.manifesto__top::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  padding-bottom: 0;
 }
 
 .manifest .container,
@@ -2240,12 +2222,14 @@
 }
 
 .manifesto__title {
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 8vw, 5.5rem);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  line-height: 1;
+  margin-top: 18px;
+}
+
+.manifesto__title img {
+  width: min(100%, 760px);
+  height: auto;
+  display: block;
+  margin-inline: auto;
 }
 
 .manifesto__subtitle {
@@ -2420,7 +2404,7 @@
 }
 
 @media (max-width: 900px) {
-  .manifesto__top {
+  .manifest {
     padding-top: 140px;
   }
 
