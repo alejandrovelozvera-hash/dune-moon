@@ -751,6 +751,7 @@
 .hero__release-sub,
 .hero__release-date,
 .hero__countdown,
+.hero__release-desc,
 .audio-preview {
   opacity: 0;
   animation: hero-in 1s var(--ease) forwards;
@@ -769,6 +770,7 @@
 .hero__release-sub { animation-delay: 0.42s; }
 .hero__release-date { animation-delay: 0.52s; }
 .hero__countdown { animation-delay: 0.62s; }
+.hero__release-desc { animation-delay: 0.68s; }
 .audio-preview { animation-delay: 0.7s; }
 
 @keyframes hero-in {
@@ -2322,7 +2324,7 @@
 }
 
 .manifesto__body {
-  max-width: 760px;
+  max-width: 920px;
 }
 
 .manifesto__text {
@@ -2330,6 +2332,8 @@
   color: var(--text);
   font-size: clamp(1.05rem, 1.5vw, 1.15rem);
   line-height: 1.9;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .manifesto__text:first-child::first-letter {
