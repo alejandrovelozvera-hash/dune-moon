@@ -84,7 +84,7 @@ export default function Music() {
         <Reveal>
           <p className="eyebrow">
             <span className="section-index">01</span>
-            {t("music.eyebrow")}
+            {t("music.toptracksEyebrow")}
           </p>
           <h2 className="section-title section-title--eq">
             <span className="gradient-text">{t("music.title")}</span>
@@ -101,11 +101,6 @@ export default function Music() {
           style={{ backgroundImage: `url(/covers/${album.id}.jpg)` }}
         />
         <div className="container music__toptracks-inner">
-          <div className="music__toptracks-info">
-            <p className="music__toptracks-label">{t("music.toptracksEyebrow")}</p>
-            <h3 className="music__toptracks-title">{t("music.toptracksTitle")}</h3>
-            <p className="music__toptracks-sub">{t("music.toptracksSub")}</p>
-          </div>
           <div className="music__artist panel">
             <LazyEmbed
               src={artistUrl}
