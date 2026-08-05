@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import LangBar from "@/components/LangBar";
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
@@ -15,6 +16,7 @@ export default function Home() {
     <LangProvider>
       <ScrollProgress />
       <Nav />
+      <LangBar />
       <main>
         <Hero />
         <Marquee />

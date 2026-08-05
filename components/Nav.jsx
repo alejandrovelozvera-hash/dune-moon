@@ -5,7 +5,7 @@ import { NAV_LINKS, SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
 export default function Nav() {
-  const { lang, setLanguage, t } = useLang();
+  const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -45,15 +45,6 @@ export default function Nav() {
         </nav>
 
         <div className="nav__right">
-          <button
-            className="nav__lang"
-            onClick={() => setLanguage(lang === "es" ? "en" : "es")}
-            aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
-            title={lang === "es" ? "Switch to English" : "Cambiar a español"}
-          >
-            {lang === "es" ? "EN" : "ES"}
-          </button>
-
           {spotify && (
             <a
               href={spotify.url}

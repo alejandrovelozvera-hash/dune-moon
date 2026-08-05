@@ -110,33 +110,6 @@
   gap: 12px;
 }
 
-.nav__lang {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 46px;
-  height: 40px;
-  padding: 0 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text);
-  cursor: pointer;
-  transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
-    background 0.3s var(--ease);
-}
-
-.nav__lang:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  background: rgba(74, 104, 168, 0.12);
-}
-
 .nav__burger {
   display: none;
   flex-direction: column;
@@ -370,8 +343,8 @@
   font-size: clamp(0.8rem, 2.4vw, 1.05rem);
   font-weight: 700;
   letter-spacing: 0.42em;
-  color: var(--magenta);
-  text-shadow: 0 0 24px rgba(51, 70, 119, 0.6);
+  color: var(--cyan);
+  text-shadow: 0 0 24px rgba(46, 197, 255, 0.5);
 }
 
 .hero__desc {
@@ -1750,6 +1723,67 @@
   transform: none;
 }
 
+/* ================= LANG BAR ================= */
+.langbar {
+  position: fixed;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(11, 18, 38, 0.72);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--glow-cyan);
+}
+
+.langbar__label {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.langbar__switch {
+  position: relative;
+  width: 22px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.3s var(--ease);
+}
+
+.langbar__switch:hover {
+  border-color: var(--cyan);
+}
+
+.langbar__thumb {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  box-shadow: 0 0 12px rgba(46, 197, 255, 0.6);
+  transition: top 0.3s var(--ease);
+}
+
+.langbar__switch--en .langbar__thumb {
+  top: 20px;
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1180px) {
   .music__grid {
@@ -1880,11 +1914,6 @@
 
   .nav__burger {
     display: flex;
-  }
-
-  .nav__lang {
-    min-width: 42px;
-    height: 44px;
   }
 
   .nav__right {
