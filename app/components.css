@@ -1170,7 +1170,7 @@
 /* ================= VIDEOS ================= */
 .videos__showcase {
   position: relative;
-  margin-top: 48px;
+  margin-top: 0;
   padding-block: clamp(40px, 6vw, 72px);
   width: 100vw;
   left: 50%;
@@ -1194,6 +1194,7 @@
 
 .videos__showcase-inner {
   position: relative;
+  margin-top: clamp(28px, 4vw, 48px);
 }
 
 .videos__player {

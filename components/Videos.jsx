@@ -156,8 +156,13 @@ export default function Videos() {
 
   return (
     <section id="videos" className="section">
-      <div className="container">
-        <Reveal>
+      <Reveal className="videos__showcase">
+        <div
+          className="videos__showcase-bg"
+          aria-hidden="true"
+          style={{ backgroundImage: `url(${currentThumb.src})` }}
+        />
+        <div className="container">
           <p className="eyebrow">
             <span className="section-index">02</span>
             {t("videos.eyebrow")}
@@ -166,15 +171,8 @@ export default function Videos() {
             <span className="gradient-text">{t("videos.title")}</span>
           </h2>
           <p className="section-sub">{t("videos.sub")}</p>
-        </Reveal>
-      </div>
+        </div>
 
-      <Reveal className="videos__showcase">
-        <div
-          className="videos__showcase-bg"
-          aria-hidden="true"
-          style={{ backgroundImage: `url(${currentThumb.src})` }}
-        />
         <div className="container videos__showcase-inner">
           <VideoStage
             key={current.id}
