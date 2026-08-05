@@ -27,6 +27,24 @@ export default function ManifestHero() {
         </div>
 
         <div className="manifesto__body">
+          <div className="manifesto__hero">
+            <div className="manifesto__hero-cover">
+              <img
+                src="/en-mi-mente-2026-remaster.jpg"
+                alt="En Mi Mente (2026 Remaster)"
+                width="800"
+                height="800"
+                loading="eager"
+              />
+            </div>
+            <div className="manifesto__hero-aside">
+              <p className="manifesto__hero-tag">{t("manifest.song")}</p>
+              <p className="manifesto__hero-quote">
+                {t("manifest.subtitle")}
+              </p>
+            </div>
+          </div>
+
           {PARAGRAPHS.map((key, i) => (
             <p key={key} className="manifesto__text">
               {t(`manifest.${key}`)}
