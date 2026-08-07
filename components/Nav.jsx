@@ -8,7 +8,6 @@ export default function Nav() {
   const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [dropped, setDropped] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -37,28 +36,15 @@ export default function Nav() {
           <span className="nav__logo-text">DUNE&nbsp;MOON</span>
         </a>
 
-        <nav className="nav__links" aria-label="Principal" onMouseLeave={() => setDropped(false)}>
+        <nav className="nav__links" aria-label="Principal">
           {links.map((link) => (
-            <div
-              key={link.href}
-              className={`nav__item${link.id === "music" ? " nav__item--music" : ""}`}
-            >
-              <a
-                href={link.href}
-                onClick={() => setOpen(false)}
-                onMouseEnter={() => link.id === "music" && setDropped(true)}
-              >
-                {link.label}
-              </a>
-              {link.id === "music" && (
-                <div className={`nav__drop${dropped ? " nav__drop--open" : ""}`}>
-                  <a href="/manifiesto" onClick={() => setOpen(false)}>
-                    {t("nav.enMiMente")}
-                  </a>
-                </div>
-              )}
-            </div>
+            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+              {link.label}
+            </a>
           ))}
+          <a href="/manifiesto" className="nav__link-manifest" onClick={() => setOpen(false)}>
+            {t("nav.enMiMente")}
+          </a>
         </nav>
 
         <div className="nav__right">
@@ -104,11 +90,10 @@ export default function Nav() {
           ))}
           <a
             href="/manifiesto"
-            className="nav__menu-sub"
-            style={{ transitionDelay: open ? "0.52s" : "0s" }}
+            style={{ transitionDelay: open ? `${0.08 * (links.length + 1)}s` : "0s" }}
             onClick={() => setOpen(false)}
           >
-            <span className="nav__menu-num">·</span>
+            <span className="nav__menu-num">0{links.length + 1}</span>
             {t("nav.enMiMente")}
           </a>
           {spotify && (
