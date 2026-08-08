@@ -51,6 +51,11 @@
   gap: 34px;
 }
 
+.nav__links .nav__item {
+  display: flex;
+  gap: 34px;
+}
+
 .nav__links a {
   position: relative;
   font-family: var(--font-display);

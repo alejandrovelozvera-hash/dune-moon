@@ -38,13 +38,17 @@ export default function Nav() {
 
         <nav className="nav__links" aria-label="Principal">
           {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
-              {link.label}
-            </a>
+            <span key={link.href} className="nav__item">
+              <a href={link.href} onClick={() => setOpen(false)}>
+                {link.label}
+              </a>
+              {link.id === "music" && (
+                <a href="/manifiesto" className="nav__link-manifest" onClick={() => setOpen(false)}>
+                  {t("nav.enMiMente")}
+                </a>
+              )}
+            </span>
           ))}
-          <a href="/manifiesto" className="nav__link-manifest" onClick={() => setOpen(false)}>
-            {t("nav.enMiMente")}
-          </a>
         </nav>
 
         <div className="nav__right">
@@ -77,25 +81,30 @@ export default function Nav() {
 
       <div className={`nav__menu ${open ? "nav__menu--open" : ""}`}>
         <nav className="nav__menu-links" aria-label="Menú móvil">
-          {links.map((link, i) => (
-            <a
-              key={link.href}
-              href={link.href}
-              style={{ transitionDelay: open ? `${0.08 * (i + 1)}s` : "0s" }}
-              onClick={() => setOpen(false)}
-            >
-              <span className="nav__menu-num">0{i + 1}</span>
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="/manifiesto"
-            style={{ transitionDelay: open ? `${0.08 * (links.length + 1)}s` : "0s" }}
-            onClick={() => setOpen(false)}
-          >
-            <span className="nav__menu-num">0{links.length + 1}</span>
-            {t("nav.enMiMente")}
-          </a>
+          {(() => {
+            const menuItems = [];
+            links.forEach((link, i) => {
+              menuItems.push({ href: link.href, label: link.label, delay: 0.08 * (i + 1) });
+              if (link.id === "music") {
+                menuItems.push({
+                  href: "/manifiesto",
+                  label: t("nav.enMiMente"),
+                  delay: 0.08 * (i + 2),
+                });
+              }
+            });
+            return menuItems.map((item, n) => (
+              <a
+                key={item.href}
+                href={item.href}
+                style={{ transitionDelay: open ? `${item.delay}s` : "0s" }}
+                onClick={() => setOpen(false)}
+              >
+                <span className="nav__menu-num">0{n + 1}</span>
+                {item.label}
+              </a>
+            ));
+          })()}
           {spotify && (
             <a
               href={spotify.url}
