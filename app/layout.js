@@ -59,11 +59,13 @@ export const metadata = {
   },
   icons: {
     icon: [
+      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-64.png", sizes: "64x64", type: "image/png" },
+      { url: "/favicon-128.png", sizes: "128x128", type: "image/png" },
+      { url: "/favicon-256.png", sizes: "256x256", type: "image/png" },
       { url: "/dune-moon-logo.png", sizes: "any", type: "image/png" },
-      { url: "/favicon.svg", sizes: "any", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
     ],
-    apple: { url: "/dune-moon-logo.png", sizes: "180x180", type: "image/png" },
+    apple: { url: "/favicon-180.png", sizes: "180x180", type: "image/png" },
   },
   robots: {
     index: true,
