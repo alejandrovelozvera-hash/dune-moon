@@ -322,7 +322,15 @@
 }
 
 .hero__featured-head {
-  margin-bottom: 22px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero__featured-head .hero__release-badge {
+  align-self: flex-start;
+  margin-bottom: 0;
 }
 
 .hero__share {
@@ -512,7 +520,7 @@
 }
 
 .hero__release-head .hero__release-badge {
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 
 .hero__release-body {
