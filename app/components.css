@@ -291,6 +291,27 @@
   opacity: 0.85;
 }
 
+.hero__single--brand {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero__single--brand .hero__brand-logo {
+  margin-top: 36px;
+  width: 220px;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 30px 60px rgba(4,8,18,0.5);
+}
+
+.hero__single--brand .hero__brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .hero__featured {
   margin-top: 32px;
   padding: 28px;
