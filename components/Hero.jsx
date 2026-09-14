@@ -38,7 +38,6 @@ function FeaturedHero() {
           <div className="hero__release-info">
             <p className="hero__release-date">{t("hero.released")}</p>
             <p className="hero__release-desc">{t("hero.releaseDesc")}</p>
-            <AudioPreview src="/en-mi-mente-preview.mp3" title="En Mi Mente" label={t("hero.previewLabel")} />
             <div className="hero__spotify-embed">
               <iframe title="En Mi Mente en Spotify" src="https://open.spotify.com/embed/album/1ucrIBMI2Znsd5RiCx94rz?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style={{ borderRadius: 12 }} />
             </div>
