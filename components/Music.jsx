@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Reveal from "./Reveal";
 import LazyEmbed from "./LazyEmbed";
-import { ARTIST_ID, DISCOGRAPHY, SOCIALS } from "@/lib/data";
+import { ARTIST_ID, DISCOGRAPHY, FEATURED_ID, SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
@@ -28,7 +28,8 @@ function Embed({ id, name, height = 352 }) {
 
 function ReleaseCard({ item, index }) {
   const { t } = useLang();
-  const [open, setOpen] = useState(false);
+  const isFeatured = item.id === FEATURED_ID;
+  const [open, setOpen] = useState(isFeatured);
 
   return (
     <Reveal delay={(index % 4) + 1} className="release">
@@ -54,7 +55,7 @@ function ReleaseCard({ item, index }) {
             </span>
           </span>
           <span className="release__card-info">
-            <span className="release__name">{item.name}</span>
+            <span className="release__name">{item.name} {isFeatured && <span className="release__badge">NUEVO</span>}</span>
             <span className="release__year">{item.year}</span>
           </span>
         </button>
@@ -108,6 +109,25 @@ export default function Music() {
       </Reveal>
 
       <div className="container">
+        <div className="music__group music__group--featured">
+          <Reveal className="music__group-head">
+            <h3 className="music__group-title">En Mi Mente (2026 Remaster) <span className="release__badge release__badge--lg">YA DISPONIBLE</span></h3>
+            <span className="music__group-count">2026</span>
+          </Reveal>
+          <Reveal delay={1} className="music__album panel music__album--featured">
+            <LazyEmbed
+              src={embedUrl(FEATURED_ID)}
+              title="En Mi Mente (2026 Remaster) en Spotify"
+              height={352}
+              cover={`/covers/${FEATURED_ID}.jpg`}
+            />
+          </Reveal>
+          <Reveal className="music__featured-cta">
+            <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--primary">Escuchar en Spotify</a>
+            <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">Abrir en Spotify</a>
+          </Reveal>
+        </div>
+
         <div className="music__group">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{album.name}</h3>

@@ -9,7 +9,7 @@ export const metadata = {
     template: "%s · Dune Moon",
   },
   description:
-    "Dune Moon es el proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador. Música ochentera con un toque actual: álbum Tiempo, sencillos y EPs en Spotify. Escucha, mira los videos y sigue el estreno del nuevo single.",
+    "Dune Moon es el proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador. ¡Nuevo single En Mi Mente (2026 Remaster) ya disponible en Spotify! Escucha el álbum Tiempo, sencillos y EPs.",
   keywords: [
     "Dune Moon",
     "Synthpop",
