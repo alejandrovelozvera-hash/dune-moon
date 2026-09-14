@@ -9,7 +9,7 @@ export const metadata = {
     template: "%s · Dune Moon",
   },
   description:
-    "Dune Moon es el proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador. ¡Nuevo single En Mi Mente (2026 Remaster) ya disponible en Spotify! Escucha el álbum Tiempo, sencillos y EPs.",
+    "Dune Moon — Synthpop / Synthwave desde Riobamba. ¡En Mi Mente (2026 Remaster) YA DISPONIBLE en Spotify! Escucha Tiempo (2019), 5 singles y 3 EPs.",
   keywords: [
     "Dune Moon",
     "Synthpop",
@@ -34,9 +34,9 @@ export const metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Dune Moon · Synthpop / Synthwave desde Riobamba, Ecuador",
+    title: "Dune Moon · En Mi Mente (2026 Remaster) ya disponible",
     description:
-      "Proyecto de Synthpop / Synthwave de Luis Alejandro Veloz Vera desde Riobamba, Ecuador. Música ochentera con un toque actual. Escucha en Spotify y mira los videos en YouTube.",
+      "¡Ya en Spotify! En Mi Mente (2026 Remaster) — el nuevo single de Dune Moon. Synthpop / Synthwave desde Riobamba, Ecuador.",
     type: "website",
     siteName: "Dune Moon",
     locale: "es_EC",
@@ -126,13 +126,27 @@ const jsonLd = {
       datePublished: "2019",
       numberOfTracks: 12,
     },
+    {
+      "@type": "MusicAlbum",
+      name: "En Mi Mente (2026 Remaster)",
+      datePublished: "2026-09-14",
+      url: "https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz",
+    },
   ],
   track: [
     {
       "@type": "MusicRecording",
+      name: "En Mi Mente (2026 Remaster)",
+      byArtist: { "@type": "MusicGroup", name: "Dune Moon" },
+      datePublished: "2026-09-14",
+      url: "https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz",
+      genre: ["Synthpop", "Synthwave"],
+    },
+    {
+      "@type": "MusicRecording",
       name: "En Mi Mente",
       byArtist: { "@type": "MusicGroup", name: "Dune Moon" },
-      datePublished: "2026-08-15",
+      datePublished: "2020",
       genre: ["Synthpop", "Synthwave"],
     },
   ],

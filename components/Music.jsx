@@ -63,6 +63,12 @@ function ReleaseCard({ item, index }) {
         {open && (
           <div className="release__expand">
             <Embed id={item.id} name={item.name} height={352} />
+            {isFeatured && (
+              <div className="release__share">
+                <button type="button" className="hero__share-btn" onClick={() => { const u=`https://open.spotify.com/album/${item.id}`; if(navigator.share) navigator.share({title:`${item.name} — Dune Moon`, url:u}); else { navigator.clipboard.writeText(u); alert("Link copiado"); } }} aria-label="Compartir">↗</button>
+                <a href={`https://open.spotify.com/album/${item.id}`} target="_blank" rel="noopener noreferrer" className="hero__share-btn" aria-label="Spotify">♫</a>
+              </div>
+            )}
           </div>
         )}
         <span className="release__status" aria-live="polite">
@@ -125,6 +131,7 @@ export default function Music() {
           <Reveal className="music__featured-cta">
             <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--primary">Escuchar en Spotify</a>
             <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">Abrir en Spotify</a>
+            <button type="button" className="btn btn--ghost" onClick={() => { const u="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz"; if(navigator.share) navigator.share({title:"En Mi Mente (2026 Remaster) — Dune Moon", url:u}); else { navigator.clipboard.writeText(u); alert("Link copiado"); } }}>Compartir</button>
           </Reveal>
         </div>
 
