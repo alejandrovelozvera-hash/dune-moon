@@ -671,6 +671,15 @@
   z-index: -1;
 }
 
+.hero__release-body--single {
+  display: block;
+  max-width: 560px;
+}
+
+.hero__release-body--single .hero__spotify-embed {
+  margin-top: 20px;
+}
+
 .hero__sun--pulse {
   animation: sun-drift 14s ease-in-out infinite alternate, sun-pulse 4s ease-in-out infinite;
 }

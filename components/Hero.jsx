@@ -31,10 +31,7 @@ function FeaturedHero() {
             2026 Remaster · 6 años después · Ya en Spotify
           </div>
         </div>
-        <div className="hero__release-body">
-          <div className="hero__release-cover hero__release-cover--glow">
-            <img src="/en-mi-mente-2026-remaster.jpg" alt="En Mi Mente (2026 Remaster)" width="800" height="800" loading="eager" />
-          </div>
+        <div className="hero__release-body hero__release-body--single">
           <div className="hero__release-info">
             <p className="hero__release-date">{t("hero.released")}</p>
             <p className="hero__release-desc">{t("hero.releaseDesc")}</p>
