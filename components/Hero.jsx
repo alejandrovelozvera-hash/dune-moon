@@ -19,10 +19,6 @@ function FeaturedHero() {
   return (
     <div className="hero__single">
       <p className="eyebrow hero__eyebrow hero__eyebrow--brand">{t("hero.mainEyebrow")}</p>
-      <h1 className="display hero__title hero__title--sm">
-        DUNE <span className="gradient-text">MOON</span>
-      </h1>
-      <p className="hero__tag hero__tag--sm">{t("hero.tag")}</p>
       <div className="hero__featured">
         <div className="hero__featured-head">
           <span className="hero__release-badge">{t("hero.releaseBadge")}</span>
@@ -56,7 +52,6 @@ function FeaturedHero() {
           </div>
         </div>
       </div>
-      <p className="hero__desc hero__desc--sm">{t("hero.desc")}</p>
     </div>
   );
 }
