@@ -2614,13 +2614,52 @@
 
 .manifesto__hero--single {
   grid-template-columns: 1fr;
-  max-width: 640px;
+  max-width: 660px;
   margin-inline: auto;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 32px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  isolation: isolate;
 }
 
 .manifesto__hero--single .manifesto__hero-side {
   align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.manifesto__hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.15);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.manifesto__hero-quote {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 560px;
+}
+
+.manifesto__embed-wrap {
+  margin-top: 22px;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
 }
 
 .manifesto__hero-cover {
