@@ -678,6 +678,13 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cyan);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.hero__stats-pill:hover {
+  border-color: rgba(111,180,206,0.45);
+  background: rgba(111,180,206,0.16);
+  box-shadow: 0 0 20px rgba(111,180,206,0.2);
 }
 
 .hero__stats-dot {
@@ -1030,9 +1037,12 @@
 .hero__release-badge,
 .hero__release-title,
 .hero__release-sub,
+.hero__stats-pill,
 .hero__release-date,
 .hero__countdown,
 .hero__release-desc,
+.hero__spotify-embed,
+.hero__share,
 .audio-preview {
   opacity: 0;
   animation: hero-in 1s var(--ease) forwards;
@@ -1049,9 +1059,12 @@
 .hero__release-badge { animation-delay: 0.2s; }
 .hero__release-title { animation-delay: 0.32s; }
 .hero__release-sub { animation-delay: 0.42s; }
+.hero__stats-pill { animation-delay: 0.48s; }
 .hero__release-date { animation-delay: 0.52s; }
 .hero__countdown { animation-delay: 0.62s; }
 .hero__release-desc { animation-delay: 0.68s; }
+.hero__spotify-embed { animation-delay: 0.62s; }
+.hero__share { animation-delay: 0.72s; }
 .audio-preview { animation-delay: 0.7s; }
 
 @keyframes hero-in {
