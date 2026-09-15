@@ -30,7 +30,6 @@ function FeaturedHero() {
             <span className="hero__stats-dot" />
             2026 Remaster · 6 años después · Ya en Spotify
           </div>
-          <p className="hero__release-date">{t("hero.released")}</p>
           <p className="hero__release-desc">{t("hero.releaseDesc")}</p>
           <div className="hero__actions">
             <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--primary">
