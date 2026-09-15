@@ -33,7 +33,6 @@ export default function ManifestHero() {
             <div className="manifesto__hero-bg" aria-hidden="true" style={{ backgroundImage: "url(/en-mi-mente-2026-remaster.jpg)" }} />
             <div className="manifesto__hero-side">
               <p className="manifesto__hero-tag">{t("manifest.song")}</p>
-              <blockquote className="manifesto__hero-quote">“{t("manifest.subtitle")}”</blockquote>
               <div className="hero__stats-pill" style={{ marginTop: 14 }}>
                 <span className="hero__stats-dot" />
                 Ya disponible · 14 Sep 2026 · Spotify
