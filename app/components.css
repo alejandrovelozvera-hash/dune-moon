@@ -337,7 +337,7 @@
 .hero__featured-left {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 28px;
 }
 
 .hero__featured-right {
@@ -368,7 +368,19 @@
   margin-bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+}
+
+.hero__featured-head .hero__release-title {
+  margin-top: 4px;
+}
+
+.hero__featured-head .hero__release-sub {
+  margin-top: -4px;
+}
+
+.hero__featured-head .hero__stats-pill {
+  margin-top: 6px;
 }
 
 .hero__featured-head .hero__release-badge {
@@ -612,7 +624,7 @@
   color: var(--navy-light);
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
 }
 
@@ -647,8 +659,9 @@
 }
 
 .hero__release-title--compact img {
-  width: 88%;
-  max-width: 620px;
+  width: 100%;
+  max-width: 680px;
+  letter-spacing: -0.02em;
 }
 
 .hero__stats-pill {
@@ -686,7 +699,15 @@
 
 .hero__spotify-embed--hero {
   margin-top: 0;
+  border: 1.5px solid rgba(111,180,206,0.22);
   box-shadow: 0 24px 64px rgba(0,0,0,0.45), 0 0 40px rgba(111,180,206,0.15);
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.hero__spotify-embed--hero:hover {
+  border-color: rgba(111,180,206,0.45);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 60px rgba(111,180,206,0.28);
+  transform: translateY(-2px);
 }
 
 .hero__featured-left .hero__release-date {
