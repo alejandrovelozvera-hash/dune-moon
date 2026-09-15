@@ -22,6 +22,9 @@ export default function Footer() {
               {t(`nav.${link.id}`)}
             </a>
           ))}
+          <a href="/manifiesto">En Mi Mente — Manifiesto</a>
+          <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer">Spotify · En Mi Mente</a>
+          <a href="/sitemap.xml">Sitemap</a>
         </nav>
 
         <div className="footer__socials">

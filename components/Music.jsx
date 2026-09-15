@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Reveal from "./Reveal";
 import LazyEmbed from "./LazyEmbed";
-import { ARTIST_ID, DISCOGRAPHY, FEATURED_ID, SOCIALS } from "@/lib/data";
+import { ARTIST_ID, DISCOGRAPHY, FEATURED_ID, FEATURED_UNTIL, SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
@@ -81,6 +81,10 @@ function ReleaseCard({ item, index }) {
 
 export default function Music() {
   const { t } = useLang();
+  const [showFeatured, setShowFeatured] = useState(false);
+  useEffect(() => {
+    setShowFeatured(Date.now() >= new Date(FEATURED_UNTIL).getTime());
+  }, []);
   const spotify = SOCIALS.find((s) => s.name === "Spotify");
   const album = DISCOGRAPHY.album;
 
@@ -115,25 +119,27 @@ export default function Music() {
       </Reveal>
 
       <div className="container">
-        <div className="music__group music__group--featured">
-          <Reveal className="music__group-head">
-            <h3 className="music__group-title">En Mi Mente (2026 Remaster) <span className="release__badge release__badge--lg">YA DISPONIBLE</span></h3>
-            <span className="music__group-count">2026</span>
-          </Reveal>
-          <Reveal delay={1} className="music__album panel music__album--featured">
-            <LazyEmbed
-              src={embedUrl(FEATURED_ID)}
-              title="En Mi Mente (2026 Remaster) en Spotify"
-              height={352}
-              cover={`/covers/${FEATURED_ID}.jpg`}
-            />
-          </Reveal>
-          <Reveal className="music__featured-cta">
-            <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--primary">Escuchar en Spotify</a>
-            <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">Abrir en Spotify</a>
-            <button type="button" className="btn btn--ghost" onClick={() => { const u="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz"; if(navigator.share) navigator.share({title:"En Mi Mente (2026 Remaster) — Dune Moon", url:u}); else { navigator.clipboard.writeText(u); alert("Link copiado"); } }}>Compartir</button>
-          </Reveal>
-        </div>
+        {showFeatured && (
+          <div className="music__group music__group--featured">
+            <Reveal className="music__group-head">
+              <h3 className="music__group-title">En Mi Mente (2026 Remaster) <span className="release__badge release__badge--lg">YA DISPONIBLE</span></h3>
+              <span className="music__group-count">2026</span>
+            </Reveal>
+            <Reveal delay={1} className="music__album panel music__album--featured">
+              <LazyEmbed
+                src={embedUrl(FEATURED_ID)}
+                title="En Mi Mente (2026 Remaster) en Spotify"
+                height={352}
+                cover={`/covers/${FEATURED_ID}.jpg`}
+              />
+            </Reveal>
+            <Reveal className="music__featured-cta">
+              <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--primary">Escuchar en Spotify</a>
+              <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">Abrir en Spotify</a>
+              <button type="button" className="btn btn--ghost" onClick={() => { const u="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz"; if(navigator.share) navigator.share({title:"En Mi Mente (2026 Remaster) — Dune Moon", url:u}); else { navigator.clipboard.writeText(u); alert("Link copiado"); } }}>Compartir</button>
+            </Reveal>
+          </div>
+        )}
 
         <div className="music__group">
           <Reveal className="music__group-head">

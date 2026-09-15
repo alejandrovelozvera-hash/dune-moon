@@ -16,9 +16,7 @@ export default function Bio() {
 
   const STATS = [
     { value: "2015", label: t("bio.statActive") },
-    { value: "01", label: t("bio.statAlbum") },
     { value: String(singles).padStart(2, "0"), label: t("bio.statSingles") },
-    { value: String(eps).padStart(2, "0"), label: t("bio.statEps") },
     { value: String(totalTracks).padStart(2, "0"), label: t("bio.statTracks") },
   ];
 
