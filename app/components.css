@@ -2612,6 +2612,17 @@
   align-items: center;
 }
 
+.manifesto__hero--single {
+  grid-template-columns: 1fr;
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.manifesto__hero--single .manifesto__hero-side {
+  align-items: center;
+}
+
 .manifesto__hero-cover {
   position: relative;
   aspect-ratio: 1;
