@@ -4,11 +4,15 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Reveal({ children, className = "", delay = 0, as: Tag = "div" }) {
   const ref = useRef(null);
-  const [short, setShort] = useState(false);
+  const [short, setShort] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(max-width: 640px)").matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 640px)");
-    setShort(mq.matches);
     const onChange = (e) => setShort(e.matches);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);

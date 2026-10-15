@@ -6,16 +6,15 @@ import { useLang } from "@/lib/i18n";
 export default function LazyEmbed({ src, title, height = 352, cover }) {
   const { t } = useLang();
   const ref = useRef(null);
-  const [loaded, setLoaded] = useState(false);
+  const hasIntersectionObserver = typeof IntersectionObserver !== "undefined";
+  const [loaded, setLoaded] = useState(!hasIntersectionObserver);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (!("IntersectionObserver" in window)) {
-      setLoaded(true);
-      return;
-    }
+    if (!hasIntersectionObserver) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -29,7 +28,7 @@ export default function LazyEmbed({ src, title, height = 352, cover }) {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [hasIntersectionObserver]);
 
   return (
     <div className={`lazy-embed${ready ? " is-ready" : ""}`} ref={ref} style={{ height }}>

@@ -32,13 +32,11 @@ function probeThumb(id, step) {
 
 // Busca la mejor miniatura disponible: maxresdefault -> hqdefault -> mqdefault
 function useBestThumb(id, startStep = 0) {
-  const [src, setSrc] = useState(getThumb(id, startStep));
+  const [src, setSrc] = useState(() => getThumb(id, startStep));
   const [tried, setTried] = useState(startStep);
 
   useEffect(() => {
     let cancelled = false;
-    setSrc(getThumb(id, startStep));
-    setTried(startStep);
 
     (async () => {
       for (let step = startStep; step < THUMB_STEPS.length; step++) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 
 export default function ManifestHeader() {
@@ -17,14 +18,14 @@ export default function ManifestHeader() {
   return (
     <header className={`nav manifest-nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="container nav__inner">
-        <a href="/" className="nav__logo">
+        <Link href="/" className="nav__logo">
           <span className="nav__logo-text">DUNE&nbsp;MOON</span>
-        </a>
+        </Link>
 
         <div className="nav__right">
-          <a href="/" className="btn btn--primary nav__cta">
+          <Link href="/" className="btn btn--primary nav__cta">
             {t("manifest.back")}
-          </a>
+          </Link>
         </div>
       </div>
     </header>

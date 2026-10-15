@@ -6,11 +6,7 @@ import { useLang } from "@/lib/i18n";
 import { FEATURED_UNTIL } from "@/lib/data";
 
 function useFeaturedActive() {
-  const [active, setActive] = useState(true);
-  useEffect(() => {
-    setActive(Date.now() < new Date(FEATURED_UNTIL).getTime());
-  }, []);
-  return active;
+  return Date.now() < new Date(FEATURED_UNTIL).getTime();
 }
 
 function FeaturedHero() {
