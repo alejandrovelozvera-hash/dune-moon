@@ -1,95 +1,61 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Reveal from "./Reveal";
 import LazyEmbed from "./LazyEmbed";
+import ReleaseCard from "./ReleaseCard";
+import MusicPlayer from "./MusicPlayer";
 import { ARTIST_ID, DISCOGRAPHY, FEATURED_ID, FEATURED_UNTIL, SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
 
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
-const embedUrl = (id) =>
-  `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
-
-function Embed({ id, name, height = 352 }) {
-  const { t } = useLang();
-  return (
-    <iframe
-      title={t("music.artistEmbed")}
-      src={`https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`}
-      width="100%"
-      height={height}
-      frameBorder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"
-      style={{ borderRadius: 12 }}
-    />
-  );
-}
-
-function ReleaseCard({ item, index }) {
-  const { t } = useLang();
-  const isFeatured = item.id === FEATURED_ID;
-  const [open, setOpen] = useState(isFeatured);
-
-  return (
-    <Reveal delay={(index % 4) + 1} className="release">
-      <div className={`release__tile${open ? " is-open" : ""}`}>
-        <button
-          className="release__card"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label={open ? t("music.closePlayer", { name: item.name }) : t("music.openPlayer", { name: item.name })}
-        >
-          <span className="release__cover">
-            <img
-              src={`/covers/${item.id}.jpg`}
-              alt={`${item.name}`}
-              width="300"
-              height="300"
-              loading="lazy"
-            />
-            <span className="release__play">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-                <path d="M8 5.14v14l11-7-11-7Z" />
-              </svg>
-            </span>
-          </span>
-          <span className="release__card-info">
-            <span className="release__name">{item.name} {isFeatured && <span className="release__badge">NUEVO</span>}</span>
-            <span className="release__year">{item.year}</span>
-          </span>
-        </button>
-
-        {open && (
-          <div className="release__expand">
-            <Embed id={item.id} name={item.name} height={352} />
-            {isFeatured && (
-              <div className="release__share">
-                <button type="button" className="hero__share-btn" onClick={() => { const u=`https://open.spotify.com/album/${item.id}`; if(navigator.share) navigator.share({title:`${item.name} — Dune Moon`, url:u}); else { navigator.clipboard.writeText(u); alert("Link copiado"); } }} aria-label="Compartir">↗</button>
-                <a href={`https://open.spotify.com/album/${item.id}`} target="_blank" rel="noopener noreferrer" className="hero__share-btn" aria-label="Spotify">♫</a>
-              </div>
-            )}
-          </div>
-        )}
-        <span className="release__status" aria-live="polite">
-          {open ? t("music.playerOpen", { name: item.name }) : ""}
-        </span>
-      </div>
-    </Reveal>
-  );
-}
+const embedUrl = (id) => `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
 export default function Music() {
   const { t } = useLang();
   const [showFeatured, setShowFeatured] = useState(false);
-  useEffect(() => {
-    setShowFeatured(Date.now() >= new Date(FEATURED_UNTIL).getTime());
-  }, []);
+  const [currentTrack, setCurrentTrack] = useState(null);
+  const [playerOpen, setPlayerOpen] = useState(false);
+
   const spotify = SOCIALS.find((s) => s.name === "Spotify");
   const album = DISCOGRAPHY.album;
+  const singles = DISCOGRAPHY.singles;
+  const eps = DISCOGRAPHY.eps;
+
+  const allTracks = useMemo(() => [
+    { ...album, type: "album" },
+    ...singles.map(s => ({ ...s, type: "single", tracks: 1 })),
+    ...eps.map(e => ({ ...e, type: "ep" })),
+  ], [album, singles, eps]);
+
+  const featuredTrack = useMemo(() => allTracks.find(t => t.id === FEATURED_ID), [allTracks]);
+
+  const handlePlay = useCallback((track) => {
+    setCurrentTrack(track);
+    setPlayerOpen(true);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    setPlayerOpen(false);
+    setTimeout(() => setCurrentTrack(null), 400);
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!currentTrack) return;
+    const idx = allTracks.findIndex(t => t.id === currentTrack.id);
+    const nextIdx = (idx + 1) % allTracks.length;
+    setCurrentTrack(allTracks[nextIdx]);
+  }, [currentTrack, allTracks]);
+
+  const handlePrev = useCallback(() => {
+    if (!currentTrack) return;
+    const idx = allTracks.findIndex(t => t.id === currentTrack.id);
+    const prevIdx = (idx - 1 + allTracks.length) % allTracks.length;
+    setCurrentTrack(allTracks[prevIdx]);
+  }, [currentTrack, allTracks]);
 
   return (
-    <section id="musica" className="section">
+    <section id="musica" className="section music-section">
       <Reveal className="music__toptracks">
         <div
           className="music__toptracks-bg"
@@ -119,24 +85,41 @@ export default function Music() {
       </Reveal>
 
       <div className="container">
-        {showFeatured && (
+        {showFeatured && featuredTrack && (
           <div className="music__group music__group--featured">
             <Reveal className="music__group-head">
-              <h3 className="music__group-title">En Mi Mente (2026 Remaster) <span className="release__badge release__badge--lg">YA DISPONIBLE</span></h3>
-              <span className="music__group-count">2026</span>
+              <h3 className="music__group-title">
+                {featuredTrack.name} <span className="release__badge release__badge--lg">{t("hero.releaseBadge")}</span>
+              </h3>
+              <span className="music__group-count">{featuredTrack.year}</span>
             </Reveal>
             <Reveal delay={1} className="music__album panel music__album--featured">
               <LazyEmbed
-                src={embedUrl(FEATURED_ID)}
-                title="En Mi Mente (2026 Remaster) en Spotify"
+                src={embedUrl(featuredTrack.id)}
+                title={`${featuredTrack.name} en Spotify`}
                 height={352}
-                cover={`/covers/${FEATURED_ID}.jpg`}
+                cover={`/covers/${featuredTrack.id}.jpg`}
               />
             </Reveal>
             <Reveal className="music__featured-cta">
-              <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--primary">Escuchar en Spotify</a>
-              <a href="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz" target="_blank" rel="noopener noreferrer" className="btn btn--ghost">Abrir en Spotify</a>
-              <button type="button" className="btn btn--ghost" onClick={() => { const u="https://open.spotify.com/album/1ucrIBMI2Znsd5RiCx94rz"; if(navigator.share) navigator.share({title:"En Mi Mente (2026 Remaster) — Dune Moon", url:u}); else { navigator.clipboard.writeText(u); alert("Link copiado"); } }}>Compartir</button>
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={() => handlePlay(featuredTrack)}
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5.14v14l11-7-11-7Z" />
+                </svg>
+                {t("hero.listenSpotify")}
+              </button>
+              <a
+                href={`https://open.spotify.com/album/${featuredTrack.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost"
+              >
+                {t("music.openInSpotify")}
+              </a>
             </Reveal>
           </div>
         )}
@@ -160,12 +143,18 @@ export default function Music() {
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.singles")}</h3>
             <span className="music__group-count">
-              {String(DISCOGRAPHY.singles.length).padStart(2, "0")}
+              {String(singles.length).padStart(2, "0")}
             </span>
           </Reveal>
-          <div className="music__grid">
-            {DISCOGRAPHY.singles.map((item, i) => (
-              <ReleaseCard key={item.id} item={item} index={i} />
+          <div className="music__grid music__grid--releases" role="list" aria-label={t("music.singles")}>
+            {singles.map((item, i) => (
+              <ReleaseCard
+                key={item.id}
+                item={{ ...item, tracks: 1 }}
+                index={i}
+                isFeatured={item.id === FEATURED_ID}
+                onPlay={handlePlay}
+              />
             ))}
           </div>
         </div>
@@ -174,12 +163,18 @@ export default function Music() {
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.eps")}</h3>
             <span className="music__group-count">
-              {String(DISCOGRAPHY.eps.length).padStart(2, "0")}
+              {String(eps.length).padStart(2, "0")}
             </span>
           </Reveal>
-          <div className="music__grid">
-            {DISCOGRAPHY.eps.map((item, i) => (
-              <ReleaseCard key={item.id} item={item} index={i} />
+          <div className="music__grid music__grid--releases" role="list" aria-label={t("music.eps")}>
+            {eps.map((item, i) => (
+              <ReleaseCard
+                key={item.id}
+                item={item}
+                index={i}
+                isFeatured={false}
+                onPlay={handlePlay}
+              />
             ))}
           </div>
         </div>
@@ -195,6 +190,15 @@ export default function Music() {
           </a>
         </Reveal>
       </div>
+
+      <MusicPlayer
+        currentTrack={currentTrack}
+        isOpen={playerOpen}
+        onClose={handleClose}
+        onNext={handleNext}
+        onPrev={handlePrev}
+        tracks={allTracks}
+      />
     </section>
   );
 }
