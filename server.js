@@ -51,9 +51,15 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
+    const ext = extname(filePath);
+    const isHtml = ext === ".html" || ext === "";
+
     res.writeHead(200, {
-      "Content-Type": MIME[extname(filePath)] || "application/octet-stream",
-      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Type": MIME[ext] || "application/octet-stream",
+      "Cache-Control": isHtml
+        ? "public, max-age=0, must-revalidate"
+        : "public, max-age=31536000, immutable",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
     });
     res.end(data);
   } catch (err) {

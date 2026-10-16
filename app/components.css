@@ -3963,7 +3963,13 @@
 .music-player__btn--spotify {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
   padding: 12px 24px;
   border-radius: 8px;
   border: none;

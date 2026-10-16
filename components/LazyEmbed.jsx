@@ -40,7 +40,7 @@ export default function LazyEmbed({ src, title, height = 352, cover }) {
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
-        referrerPolicy="no-referrer"
+        referrerPolicy="strict-origin-when-cross-origin"
         sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
         style={{ borderRadius: 12 }}
         onLoad={() => setReady(true)}
