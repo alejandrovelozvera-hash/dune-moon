@@ -18,7 +18,6 @@ export default function Music() {
   const [showFeatured, setShowFeatured] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [playerOpen, setPlayerOpen] = useState(false);
-  const [singlesModalOpen, setSinglesModalOpen] = useState(false);
   const [epsModalOpen, setEpsModalOpen] = useState(false);
 
   const spotify = SOCIALS.find((s) => s.name === "Spotify");
@@ -141,7 +140,7 @@ export default function Music() {
           </Reveal>
         </div>
 
-        {/* SINGLES - show first 4, "Ver más" opens modal */}
+        {/* SINGLES */}
         <div className="music__group">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.singles")}</h3>
@@ -149,8 +148,8 @@ export default function Music() {
               {String(singles.length).padStart(2, "0")}
             </span>
           </Reveal>
-          <div className="music__grid music__grid--releases" role="list" aria-label={t("music.singles")}>
-            {singles.slice(0, 4).map((item, i) => (
+          <div className="music__grid music__grid--releases music__grid--singles" role="list" aria-label={t("music.singles")}>
+            {singles.map((item, i) => (
               <ReleaseCard
                 key={item.id}
                 item={{ ...item, tracks: 1 }}
@@ -160,17 +159,6 @@ export default function Music() {
               />
             ))}
           </div>
-          {singles.length > 4 && (
-            <Reveal className="music__view-all" delay={1}>
-              <button
-                type="button"
-                className="btn btn--ghost music__view-all-btn"
-                onClick={() => setSinglesModalOpen(true)}
-              >
-                {t("music.viewAll", { count: singles.length })}
-              </button>
-            </Reveal>
-          )}
         </div>
 
         {/* EPS - show first 3, "Ver más" opens modal */}
@@ -225,16 +213,6 @@ export default function Music() {
         onNext={handleNext}
         onPrev={handlePrev}
         tracks={allTracks}
-      />
-
-      {/* Singles modal */}
-      <ReleaseModal
-        title={t("music.singles")}
-        items={singles.map(s => ({ ...s, tracks: 1, type: "single" }))}
-        isOpen={singlesModalOpen}
-        onClose={() => setSinglesModalOpen(false)}
-        onPlay={handlePlay}
-        type="single"
       />
 
       {/* EPs modal */}

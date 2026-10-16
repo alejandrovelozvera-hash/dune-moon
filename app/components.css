@@ -3710,6 +3710,11 @@
   gap: 24px;
 }
 
+.music__grid--singles {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
 @media (max-width: 1180px) {
   .music__grid--releases {
     grid-template-columns: repeat(3, 1fr);
