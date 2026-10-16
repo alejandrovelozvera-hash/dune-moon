@@ -3952,58 +3952,41 @@
 }
 
 /* Controls */
-.music-player__controls {
+.music-player__actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
+  justify-content: space-between;
+  gap: 12px;
   padding-top: 4px;
 }
 
-.music-player__btn {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text);
+.music-player__btn--spotify {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #1DB954, #1ed760);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
-    background 0.25s var(--ease), transform 0.2s var(--ease), box-shadow 0.25s var(--ease);
+  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.4);
+  transition: background 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.2s var(--ease);
 }
 
-.music-player__btn:hover:not(:disabled) {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  background: rgba(111, 180, 206, 0.12);
-  box-shadow: 0 0 16px rgba(111, 180, 206, 0.2);
+.music-player__btn--spotify:hover {
+  background: linear-gradient(135deg, #1ed760, #1DB954);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.55);
   transform: translateY(-1px);
 }
 
-.music-player__btn:active:not(:disabled) {
-  transform: scale(0.96);
-}
-
-.music-player__btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.music-player__btn--spotify {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #1DB954, #1ed760);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.4);
-}
-
-.music-player__btn--spotify:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1ed760, #1DB954);
-  border-color: transparent;
-  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.55);
+.music-player__btn--spotify:active {
+  transform: scale(0.98);
 }
 
 .music-player__close {
@@ -4018,7 +4001,6 @@
   cursor: pointer;
   transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
     background 0.25s var(--ease), transform 0.2s var(--ease);
-  margin-left: auto;
 }
 
 .music-player__close:hover {
@@ -4055,23 +4037,23 @@
 
   .music-player__title {
     font-size: 0.8rem;
-  }
+}
 
   .music-player__artist {
     font-size: 0.6rem;
   }
 
-  .music-player__btn {
-    width: 36px;
-    height: 36px;
-  }
-
   .music-player__btn--spotify {
-    width: 40px;
-    height: 40px;
+    padding: 8px 14px;
+    font-size: 0.6rem;
   }
 
+  .music-player__close {
+    width: 32px;
+    height: 32px;
   }
+
+}
 
 /* ================= RELEASE MODAL (Ver más Singles/EPs) ================= */
 .release-modal__backdrop {

@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
-  SkipBack,
-  SkipForward,
   ExternalLink,
   X,
   Loader2,
@@ -14,7 +12,7 @@ import { useLang } from "@/lib/i18n";
 const STORAGE_KEY = "dune-moon-player-state";
 const embedUrl = (id) => `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
-export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onPrev, tracks }) {
+export default function MusicPlayer({ currentTrack, isOpen, onClose, tracks }) {
   const { t } = useLang();
   const reduce = useReducedMotion();
   const playerRef = useRef(null);
@@ -49,19 +47,9 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
     }
   }, [currentTrack]);
 
-  const handleNext = useCallback(() => {
-    onNext();
-  }, [onNext]);
-
-  const handlePrev = useCallback(() => {
-    onPrev();
-  }, [onPrev]);
-
   const handleKeyDown = useCallback((e) => {
     if (e.key === "Escape") onClose();
-    if (e.key === "ArrowRight") handleNext();
-    if (e.key === "ArrowLeft") handlePrev();
-  }, [onClose, handleNext, handlePrev]);
+  }, [onClose]);
 
   if (!isOpen || !currentTrack) return null;
 
@@ -114,41 +102,24 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
           </div>
         </div>
 
-        <div className="music-player__controls">
-          <button
-            className="music-player__btn music-player__btn--prev"
-            onClick={handlePrev}
-            aria-label={t("music.prevTrack")}
-            disabled={!tracks || tracks.length <= 1}
-          >
-            <SkipBack size={20} aria-hidden="true" />
-          </button>
-
+        <div className="music-player__actions">
           <button
             className="music-player__btn music-player__btn--spotify"
             onClick={handleOpenSpotify}
             aria-label={t("music.openInSpotify")}
           >
-            <ExternalLink size={20} aria-hidden="true" />
+            <ExternalLink size={18} aria-hidden="true" />
+            <span>{t("music.listenOnSpotify")}</span>
           </button>
 
           <button
-            className="music-player__btn music-player__btn--next"
-            onClick={handleNext}
-            aria-label={t("music.nextTrack")}
-            disabled={!tracks || tracks.length <= 1}
+            className="music-player__close"
+            onClick={onClose}
+            aria-label={t("music.closePlayer")}
           >
-            <SkipForward size={20} aria-hidden="true" />
+            <X size={20} aria-hidden="true" />
           </button>
         </div>
-
-        <button
-          className="music-player__close"
-          onClick={onClose}
-          aria-label={t("music.closePlayer")}
-        >
-          <X size={20} aria-hidden="true" />
-        </button>
       </div>
     </motion.div>
   );
