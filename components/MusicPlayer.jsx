@@ -87,28 +87,13 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, tracks }) {
           />
         </div>
 
-        <div className="music-player__track">
-          <img
-            src={`/covers/${currentTrack.id}.jpg`}
-            alt=""
-            width="56"
-            height="56"
-            className="music-player__cover"
-            loading="lazy"
-          />
-          <div className="music-player__meta">
-            <p className="music-player__title">{currentTrack.name}</p>
-            <p className="music-player__artist">Dune Moon</p>
-          </div>
-        </div>
-
         <div className="music-player__actions">
           <button
             className="music-player__btn music-player__btn--spotify"
             onClick={handleOpenSpotify}
-            aria-label={t("music.openInSpotify")}
+            aria-label={t("music.listenOnSpotify")}
           >
-            <ExternalLink size={18} aria-hidden="true" />
+            <ExternalLink size={16} aria-hidden="true" />
             <span>{t("music.listenOnSpotify")}</span>
           </button>
 
