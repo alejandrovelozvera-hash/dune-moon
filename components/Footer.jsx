@@ -43,8 +43,13 @@ export default function Footer() {
       </div>
 
       <div className="container footer__bottom">
-        <span>© {year} Dune Moon · Alejandro Veloz</span>
-        <span>{t("footer.made")}</span>
+        <span>© {year} Dune Moon</span>
+        <span>
+          {t("footer.devBy")}{" "}
+          <a href="https://biyum.agency" target="_blank" rel="noopener noreferrer">
+            Biyum
+          </a>
+        </span>
       </div>
     </footer>
   );
