@@ -85,7 +85,7 @@ export default function Hero() {
   }, []);
   const parallax = Math.min(offset * 0.25, 140);
   return (
-    <section id="top" className="hero hero--featured">
+    <section id="top" className="hero">
       <Starfield />
       <div className="hero__sun hero__sun--pulse" aria-hidden="true" />
       <div className="hero__grid" aria-hidden="true" />

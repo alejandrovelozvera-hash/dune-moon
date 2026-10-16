@@ -65,7 +65,7 @@ export default function Music() {
   }, [currentTrack, allTracks]);
 
   return (
-    <section id="musica" className="section music-section">
+      <section id="musica" className="section">
       <Reveal className="music__toptracks">
         <div
           className="music__toptracks-bg"
