@@ -94,6 +94,7 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
             frameBorder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
             onLoad={() => setIsLoading(false)}
           />
         </div>

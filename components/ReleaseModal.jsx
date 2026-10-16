@@ -58,6 +58,7 @@ function ReleaseCardModal({ item, index, isExpanded, onToggleExpand, embedUrl, r
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
               onLoad={() => setIframeLoaded(true)}
               className="release-card-modal__iframe"
             />
@@ -146,9 +147,9 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
         role="dialog"
         aria-modal="true"
         aria-labelledby="release-modal-title"
-        initial={reduce ? false : { y: 20, opacity: 0, scale: 0.98 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={reduce ? false : { y: 20, opacity: 0, scale: 0.98 }}
+        initial={reduce ? false : { opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={reduce ? false : { opacity: 0, scale: 0.98 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         onKeyDown={handleKeyDown}
       >
