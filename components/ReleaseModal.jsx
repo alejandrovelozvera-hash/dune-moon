@@ -67,6 +67,7 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
         exit={reduce ? false : { y: 20, opacity: 0, scale: 0.98 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         onKeyDown={handleKeyDown}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="release-modal__header">
           <h2 id="release-modal-title" className="release-modal__title">{title}</h2>
