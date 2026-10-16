@@ -2401,10 +2401,6 @@
     gap: 12px;
   }
 
-  .music__grid > .release:has(.release__tile.is-open) {
-    grid-column: 1 / -1;
-  }
-
   .contact__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
@@ -4441,10 +4437,7 @@
   transform: rotate(90deg);
 }
 
-/* Grid adjustment for expanded card */
-.release-modal__grid:has(.release-card-modal.is-expanded) {
-  grid-template-columns: 1fr;
-}
+/* Grid adjustment for expanded card - handled by card's grid-column: 1 / -1 */
 
 /* Responsive for modal cards */
 @media (max-width: 640px) {
