@@ -3853,14 +3853,13 @@
   z-index: 299;
   background: rgba(6, 10, 20, 0.7);
   backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .release-modal {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 300;
   width: 100%;
   max-width: 640px;
   max-height: 90vh;
