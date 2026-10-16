@@ -2366,7 +2366,31 @@
   line-height: 1.7;
 }
 
+/* Hero móvil: elementos centrados */
+@media (max-width: 640px) {
+  .hero__single--brand,
+  .hero__single--split {
+    align-items: center;
+    text-align: center;
+  }
 
+  .hero__featured,
+  .hero__featured--split {
+    width: 100%;
+  }
+
+  .hero__featured-left {
+    align-items: center;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__share {
+    justify-content: center;
+  }
+}
 
 @media (max-width: 900px) {
   .manifest {
