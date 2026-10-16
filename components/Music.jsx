@@ -199,7 +199,7 @@ export default function Music() {
                 className="btn btn--ghost music__view-all-btn"
                 onClick={() => setEpsModalOpen(true)}
               >
-                {t("music.viewAll", { count: eps.length })}
+                {t("music.viewAllEps", { count: eps.length })}
               </button>
             </Reveal>
           )}
