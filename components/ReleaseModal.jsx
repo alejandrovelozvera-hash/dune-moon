@@ -1,15 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { X } from "lucide-react";
-import ReleaseCard from "./ReleaseCard";
+import { X, Play, Loader2 } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+
+const embedUrl = (id) => `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
 export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, type }) {
   const { t } = useLang();
   const reduce = useReducedMotion();
   const modalRef = useRef(null);
+  const [expandedId, setExpandedId] = useState(null);
 
   // Focus trap
   useEffect(() => {
@@ -43,6 +45,15 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
     if (e.key === "Escape") onClose();
   }, [onClose]);
 
+  const handleCardClick = (item) => {
+    if (expandedId === item.id) {
+      setExpandedId(null);
+    } else {
+      setExpandedId(item.id);
+      onPlay(item);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -67,7 +78,6 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
         exit={reduce ? false : { y: 20, opacity: 0, scale: 0.98 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         onKeyDown={handleKeyDown}
-        onClick={(e) => e.stopPropagation()}
       >
         <div className="release-modal__header">
           <h2 id="release-modal-title" className="release-modal__title">{title}</h2>
@@ -83,17 +93,92 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
         <div className="release-modal__content">
           <div className="release-modal__grid" role="list" aria-label={title}>
             {items.map((item, i) => (
-              <ReleaseCard
+              <ReleaseCardModal
                 key={item.id}
                 item={item}
                 index={i}
-                isFeatured={false}
-                onPlay={onPlay}
+                isExpanded={expandedId === item.id}
+                onToggleExpand={() => handleCardClick(item)}
+                embedUrl={embedUrl(item.id)}
               />
             ))}
           </div>
         </div>
       </motion.div>
     </>
+  );
+}
+
+function ReleaseCardModal({ item, index, isExpanded, onToggleExpand, embedUrl }) {
+  const { t } = useLang();
+  const [hovered, setHovered] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  return (
+    <motion.article
+      className={`release-card-modal${isExpanded ? " is-expanded" : ""}${hovered ? " is-hovered" : ""}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      initial={reduce ? false : { opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: (index % 8) * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="release-card-modal__cover-wrapper">
+        <img
+          src={`/covers/${item.id}.jpg`}
+          alt={`${item.name} cover`}
+          width="300"
+          height="300"
+          loading="lazy"
+          className="release-card-modal__cover"
+        />
+        <div className="release-card-modal__overlay" aria-hidden="true">
+          {!isExpanded && (
+            <button
+              className="release-card-modal__play-btn"
+              onClick={onToggleExpand}
+              aria-label={t("music.openPlayer", { name: item.name })}
+            >
+              <Play size={32} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="release-card-modal__info">
+        <h3 className="release-card-modal__name">{item.name}</h3>
+        <span className="release-card-modal__year">{item.year}</span>
+      </div>
+
+      {isExpanded && (
+        <div className="release-card-modal__expand">
+          <div className="release-card-modal__embed-wrapper">
+            <iframe
+              src={embedUrl}
+              title={`${item.name} en Spotify`}
+              width="100%"
+              height={352}
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              onLoad={() => setIframeLoaded(true)}
+              className="release-card-modal__iframe"
+            />
+            {!iframeLoaded && (
+              <div className="release-card-modal__loader">
+                <Loader2 className="release-card-modal__spinner" size={32} aria-hidden="true" />
+              </div>
+            )}
+          </div>
+          <button
+            className="release-card-modal__close-expand"
+            onClick={onToggleExpand}
+            aria-label={t("music.closePlayer")}
+          >
+            <X size={20} aria-hidden="true" />
+          </button>
+        </div>
+      )}
+    </motion.article>
   );
 }

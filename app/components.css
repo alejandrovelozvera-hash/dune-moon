@@ -4202,7 +4202,262 @@
   transform: translateY(-2px);
 }
 
-/* Music player progress handle */
+/* ================= RELEASE CARD MODAL (inside modal) ================= */
+.release-card-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease),
+    transform 0.4s var(--ease), background 0.4s var(--ease);
+  cursor: pointer;
+}
+
+.release-card-modal:hover,
+.release-card-modal.is-hovered {
+  border-color: var(--border-strong);
+  box-shadow:
+    0 0 34px rgba(91, 124, 184, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.release-card-modal.is-expanded {
+  cursor: default;
+  z-index: 10;
+  grid-column: 1 / -1;
+}
+
+.release-card-modal__cover-wrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bg-elevated);
+}
+
+.release-card-modal__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease), filter 0.4s var(--ease);
+}
+
+.release-card-modal:hover .release-card-modal__cover {
+  transform: scale(1.05);
+  filter: brightness(0.9) saturate(1.1);
+}
+
+.release-card-modal.is-expanded .release-card-modal__cover {
+  transform: none;
+  filter: none;
+}
+
+.release-card-modal__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 20, 0.35);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+}
+
+.release-card-modal:hover .release-card-modal__overlay,
+.release-card-modal.is-hovered .release-card-modal__overlay {
+  opacity: 1;
+}
+
+.release-card-modal.is-expanded .release-card-modal__overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.release-card-modal__play-btn {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: #060a14;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 0 rgba(111, 180, 206, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: play-pulse 1.6s var(--ease) infinite;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.release-card-modal__play-btn:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 0 0 rgba(111, 180, 206, 0.4),
+    0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes play-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(111, 180, 206, 0.4),
+      0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow:
+      0 0 0 16px rgba(111, 180, 206, 0),
+      0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(111, 180, 206, 0),
+      0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.release-card-modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  flex: 1;
+}
+
+.release-card-modal__name {
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.release-card-modal__year {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--cyan);
+}
+
+/* Expanded state */
+.release-card-modal__expand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background: rgba(6, 10, 20, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 14px;
+  animation: expand-in 0.3s var(--ease);
+  overflow: hidden;
+}
+
+@keyframes expand-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.release-card-modal__embed-wrapper {
+  flex: 1;
+  position: relative;
+  padding: 16px;
+}
+
+.release-card-modal__iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 352px;
+  border: none;
+  border-radius: 8px;
+  background: #191919;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.release-card-modal__iframe[style*="opacity: 1"] {
+  opacity: 1;
+}
+
+.release-card-modal__loader {
+  position: absolute;
+  inset: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 20, 0.9);
+  border-radius: 8px;
+  z-index: 5;
+}
+
+.release-card-modal__spinner {
+  animation: spin 1s linear infinite;
+  color: var(--cyan);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.release-card-modal__close-expand {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+    background 0.25s var(--ease), transform 0.2s var(--ease);
+}
+
+.release-card-modal__close-expand:hover {
+  border-color: var(--magenta);
+  color: var(--magenta);
+  background: rgba(236, 72, 153, 0.1);
+  transform: rotate(90deg);
+}
+
+/* Grid adjustment for expanded card */
+.release-modal__grid:has(.release-card-modal.is-expanded) {
+  grid-template-columns: 1fr;
+}
+
+/* Responsive for modal cards */
+@media (max-width: 640px) {
+  .release-card-modal.is-expanded {
+    grid-column: 1 / -1;
+  }
+  
+  .release-card-modal__iframe {
+    min-height: 300px;
+  }
+}
+
+/* Reduced motion */
 .music-player__progress-handle {
   position: absolute;
   top: 50%;
