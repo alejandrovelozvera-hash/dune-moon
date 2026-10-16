@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { X, Play, Loader2, ExternalLink } from "lucide-react";
+import { X } from "lucide-react";
 import ReleaseCard from "./ReleaseCard";
 import { useLang } from "@/lib/i18n";
 
@@ -10,7 +10,6 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
   const { t } = useLang();
   const reduce = useReducedMotion();
   const modalRef = useRef(null);
-  const [visibleItems, setVisibleItems] = useState(items);
 
   // Focus trap
   useEffect(() => {
@@ -63,9 +62,9 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
         role="dialog"
         aria-modal="true"
         aria-labelledby="release-modal-title"
-        initial={reduce ? false : { y: 40, opacity: 0, scale: 0.96 }}
+        initial={reduce ? false : { y: 20, opacity: 0, scale: 0.98 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={reduce ? false : { y: 40, opacity: 0, scale: 0.96 }}
+        exit={reduce ? false : { y: 20, opacity: 0, scale: 0.98 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         onKeyDown={handleKeyDown}
       >
@@ -82,7 +81,7 @@ export default function ReleaseModal({ title, items, isOpen, onClose, onPlay, ty
 
         <div className="release-modal__content">
           <div className="release-modal__grid" role="list" aria-label={title}>
-            {visibleItems.map((item, i) => (
+            {items.map((item, i) => (
               <ReleaseCard
                 key={item.id}
                 item={item}

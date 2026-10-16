@@ -3846,6 +3846,216 @@
   }
 }
 
+/* ================= MUSIC PLAYER (FLOATING) ================= */
+.music-player {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 200;
+  pointer-events: none;
+  max-width: 480px;
+  width: calc(100% - 48px);
+}
+
+.music-player__inner {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(111, 180, 206, 0.3);
+  background: rgba(6, 10, 20, 0.95);
+  backdrop-filter: blur(20px) saturate(1.2);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(111, 180, 206, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.music-player__track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.music-player__cover {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.music-player__meta {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.music-player__title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player__artist {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-player__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.music-player__btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+    background 0.25s var(--ease), transform 0.2s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.music-player__btn:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: rgba(111, 180, 206, 0.12);
+  box-shadow: 0 0 16px rgba(111, 180, 206, 0.2);
+  transform: translateY(-1px);
+}
+
+.music-player__btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.music-player__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.music-player__btn--play {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  border-color: transparent;
+  color: #060a14;
+  box-shadow:
+    0 4px 16px rgba(111, 180, 206, 0.4),
+    0 0 0 3px rgba(111, 180, 206, 0.15);
+}
+
+.music-player__btn--play:hover:not(:disabled) {
+  background: linear-gradient(135deg, #56d6ff, #a279ff);
+  box-shadow:
+    0 6px 20px rgba(111, 180, 206, 0.55),
+    0 0 0 3px rgba(111, 180, 206, 0.2);
+  border-color: transparent;
+}
+
+.music-player__spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.music-player__progress {
+  display: none; /* Hidden in floating mode - decorative only */
+}
+
+.music-player__spotify-btn {
+  display: none; /* Hidden in floating mode - Play button opens Spotify */
+}
+
+.music-player__close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+    background 0.25s var(--ease), transform 0.2s var(--ease);
+  flex-shrink: 0;
+}
+
+.music-player__close:hover {
+  border-color: var(--magenta);
+  color: var(--magenta);
+  background: rgba(236, 72, 153, 0.1);
+  transform: rotate(90deg);
+}
+
+/* Mobile responsive for floating player */
+@media (max-width: 640px) {
+  .music-player {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    max-width: none;
+    width: auto;
+  }
+
+  .music-player__inner {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .music-player__cover {
+    width: 44px;
+    height: 44px;
+  }
+
+  .music-player__title {
+    font-size: 0.8rem;
+  }
+
+  .music-player__artist {
+    font-size: 0.6rem;
+  }
+
+  .music-player__btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .music-player__btn--play {
+    width: 38px;
+    height: 38px;
+  }
+
+  .music-player__close {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 /* ================= RELEASE MODAL (Ver más Singles/EPs) ================= */
 .release-modal__backdrop {
   position: fixed;
@@ -3856,13 +4066,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px;
+  overflow-y: auto;
 }
 
 .release-modal {
+  position: relative;
   width: 100%;
   max-width: 640px;
-  max-height: 90vh;
+  max-height: calc(100vh - 48px);
   border-radius: 20px;
   border: 1px solid rgba(111, 180, 206, 0.3);
   background: rgba(6, 10, 20, 0.98);
