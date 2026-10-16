@@ -8,7 +8,6 @@ import { useLang } from "@/lib/i18n";
 export default function ReleaseCard({ item, index, isFeatured, isActive, onPlay }) {
   const { t } = useLang();
   const [hovered, setHovered] = useState(false);
-  const [showTracklist, setShowTracklist] = useState(false);
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -50,15 +49,11 @@ export default function ReleaseCard({ item, index, isFeatured, isActive, onPlay 
             </span>
           )}
           <div className="release-card__overlay" aria-hidden="true">
-            <button
-              className="release-card__play-btn"
-              onClick={handleClick}
-              aria-label={t("music.openPlayer", { name: item.name })}
-            >
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
+            <span className="release-card__play-btn">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
                 <path d="M8 5.14v14l11-7-11-7Z" />
               </svg>
-            </button>
+            </span>
             {isFeatured && (
               <span className="release-card__badge">{t("hero.releaseBadge")}</span>
             )}
@@ -69,17 +64,6 @@ export default function ReleaseCard({ item, index, isFeatured, isActive, onPlay 
           <h3 className="release-card__name">{item.name}</h3>
           <span className="release-card__year">{item.year}</span>
         </div>
-
-        {showTracklist && item.tracks && (
-          <div className="release-card__tracklist" role="list" aria-label={t("music.tracklist", { name: item.name })}>
-            {Array.from({ length: item.tracks }, (_, i) => (
-              <span key={i} className="release-card__track">
-                <span className="release-card__track-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="release-card__track-title">Track {i + 1}</span>
-              </span>
-            ))}
-          </div>
-        )}
       </article>
     </Reveal>
   );

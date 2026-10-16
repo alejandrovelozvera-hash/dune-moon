@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useSyncExternalStore } from "react";
 import Reveal from "./Reveal";
 import LazyEmbed from "./LazyEmbed";
 import ReleaseCard from "./ReleaseCard";
@@ -13,9 +13,16 @@ import { Play } from "lucide-react";
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
 const embedUrl = (id) => `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
+const subscribeNoop = () => () => {};
+
 export default function Music() {
   const { t } = useLang();
-  const [showFeatured, setShowFeatured] = useState(false);
+  // El grupo destacado solo se muestra mientras no venza FEATURED_UNTIL
+  const showFeatured = useSyncExternalStore(
+    subscribeNoop,
+    () => Date.now() < new Date(FEATURED_UNTIL).getTime(),
+    () => false
+  );
   const [currentTrack, setCurrentTrack] = useState(null);
   const [playerOpen, setPlayerOpen] = useState(false);
   const [epsModalOpen, setEpsModalOpen] = useState(false);
@@ -125,10 +132,12 @@ export default function Music() {
           </div>
         )}
 
-        <div className="music__group">
+        <div className="music__group music__group--album">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{album.name}</h3>
-            <span className="music__group-count">{album.year}</span>
+            <span className="music__group-count">
+              {album.year} · {t("music.tracksCount", { count: album.tracks })}
+            </span>
           </Reveal>
           <Reveal delay={1} className="music__album panel">
             <LazyEmbed
@@ -141,7 +150,7 @@ export default function Music() {
         </div>
 
         {/* SINGLES */}
-        <div className="music__group">
+        <div className="music__group music__group--singles">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.singles")}</h3>
             <span className="music__group-count">
@@ -163,7 +172,7 @@ export default function Music() {
         </div>
 
         {/* EPS - show first 3, "Ver más" opens modal */}
-        <div className="music__group">
+        <div className="music__group music__group--eps">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.eps")}</h3>
             <span className="music__group-count">

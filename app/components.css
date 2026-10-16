@@ -1291,6 +1291,45 @@
   color: var(--text-faint);
 }
 
+/* Jerarquía: el álbum manda; sencillos y EPs más discretos */
+.music__group--album .music__group-title {
+  font-size: clamp(1.05rem, 3.4vw, 1.3rem);
+  letter-spacing: 0.16em;
+}
+
+.music__group--album .music__group-title::before {
+  width: 8px;
+  height: 8px;
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(111, 180, 206, 0.6);
+}
+
+.music__group--album .music__group-count {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.music__group--album .music__album {
+  border-color: rgba(111, 180, 206, 0.28);
+  box-shadow:
+    0 0 44px rgba(111, 180, 206, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.music__group--singles .music__group-title,
+.music__group--eps .music__group-title {
+  color: var(--text-dim);
+}
+
+.music__group--singles .music__group-title::before,
+.music__group--eps .music__group-title::before {
+  width: 6px;
+  height: 6px;
+  margin-right: 12px;
+  background: rgba(111, 180, 206, 0.45);
+  box-shadow: none;
+}
+
 .music__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3132,55 +3171,9 @@
   color: var(--cyan);
 }
 
-.release-card__tracklist {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0 16px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: auto;
-  animation: tracklist-in 0.3s var(--ease);
-}
-
-@keyframes tracklist-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.release-card__track {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  padding: 4px 0;
-  transition: color 0.2s var(--ease);
-}
-
-.release-card__track:hover {
-  color: var(--cyan);
-}
-
-.release-card__track-num {
-  flex-shrink: 0;
-  font-family: var(--font-display);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--text-faint);
-  min-width: 28px;
-}
-
-.release-card__track-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.release-card__inner:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 /* ================= MUSIC MODAL ================= */
@@ -3767,7 +3760,7 @@
 /* Responsive adjustments for music grid */
 .music__grid--releases {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 
@@ -3803,10 +3796,6 @@
 
   .release-card__info {
     padding: 14px;
-  }
-
-  .release-card__tracklist {
-    padding: 0 14px 14px;
   }
 }
 
@@ -4597,7 +4586,6 @@ html.is-player-open {
   .release-card__cover,
   .release-card__overlay,
   .release-card__play-btn,
-  .release-card__tracklist,
   .music-player {
     animation: none !important;
     transition: none !important;
