@@ -2,7 +2,6 @@ import Nav from "@/components/Nav";
 import LangBar from "@/components/LangBar";
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
 import Music from "@/components/Music";
 import Videos from "@/components/Videos";
 import Bio from "@/components/Bio";
@@ -19,7 +18,6 @@ export default function Home() {
       <LangBar />
       <main>
         <Hero />
-        <Marquee />
         <Music />
         <Videos />
         <Bio />
