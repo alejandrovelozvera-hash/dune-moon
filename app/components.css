@@ -3963,30 +3963,36 @@
 .music-player__btn--spotify {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 999px;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
   border: none;
-  background: linear-gradient(135deg, #1DB954, #1ed760);
+  background: #1DB954;
   color: #fff;
   font-family: var(--font-display);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.4);
-  transition: background 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.2s var(--ease);
+  box-shadow: 0 2px 8px rgba(29, 185, 84, 0.3);
+  transition: background 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.1s var(--ease);
 }
 
 .music-player__btn--spotify:hover {
-  background: linear-gradient(135deg, #1ed760, #1DB954);
-  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.55);
+  background: #1ed760;
+  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.4);
   transform: translateY(-1px);
 }
 
 .music-player__btn--spotify:active {
   transform: scale(0.98);
+  background: #1aa34a;
+}
+
+.music-player__btn--spotify:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.5);
 }
 
 .music-player__close {
