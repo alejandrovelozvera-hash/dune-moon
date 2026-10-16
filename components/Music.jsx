@@ -5,8 +5,10 @@ import Reveal from "./Reveal";
 import LazyEmbed from "./LazyEmbed";
 import ReleaseCard from "./ReleaseCard";
 import MusicPlayer from "./MusicPlayer";
+import ReleaseModal from "./ReleaseModal";
 import { ARTIST_ID, DISCOGRAPHY, FEATURED_ID, FEATURED_UNTIL, SOCIALS } from "@/lib/data";
 import { useLang } from "@/lib/i18n";
+import { Play } from "lucide-react";
 
 const artistUrl = `https://open.spotify.com/embed/artist/${ARTIST_ID}?utm_source=generator&theme=0`;
 const embedUrl = (id) => `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
@@ -16,6 +18,8 @@ export default function Music() {
   const [showFeatured, setShowFeatured] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [playerOpen, setPlayerOpen] = useState(false);
+  const [singlesModalOpen, setSinglesModalOpen] = useState(false);
+  const [epsModalOpen, setEpsModalOpen] = useState(false);
 
   const spotify = SOCIALS.find((s) => s.name === "Spotify");
   const album = DISCOGRAPHY.album;
@@ -35,7 +39,7 @@ export default function Music() {
     setPlayerOpen(true);
   }, []);
 
-  const handleClose = useCallback(() => {
+  const handleClosePlayer = useCallback(() => {
     setPlayerOpen(false);
     setTimeout(() => setCurrentTrack(null), 400);
   }, []);
@@ -107,9 +111,7 @@ export default function Music() {
                 className="btn btn--primary"
                 onClick={() => handlePlay(featuredTrack)}
               >
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5.14v14l11-7-11-7Z" />
-                </svg>
+                <Play size={16} aria-hidden="true" />
                 {t("hero.listenSpotify")}
               </button>
               <a
@@ -139,6 +141,7 @@ export default function Music() {
           </Reveal>
         </div>
 
+        {/* SINGLES - show first 4, "Ver más" opens modal */}
         <div className="music__group">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.singles")}</h3>
@@ -147,7 +150,7 @@ export default function Music() {
             </span>
           </Reveal>
           <div className="music__grid music__grid--releases" role="list" aria-label={t("music.singles")}>
-            {singles.map((item, i) => (
+            {singles.slice(0, 4).map((item, i) => (
               <ReleaseCard
                 key={item.id}
                 item={{ ...item, tracks: 1 }}
@@ -157,8 +160,20 @@ export default function Music() {
               />
             ))}
           </div>
+          {singles.length > 4 && (
+            <Reveal className="music__view-all" delay={1}>
+              <button
+                type="button"
+                className="btn btn--ghost music__view-all-btn"
+                onClick={() => setSinglesModalOpen(true)}
+              >
+                {t("music.viewAll", { count: singles.length })}
+              </button>
+            </Reveal>
+          )}
         </div>
 
+        {/* EPS - show first 3, "Ver más" opens modal */}
         <div className="music__group">
           <Reveal className="music__group-head">
             <h3 className="music__group-title">{t("music.eps")}</h3>
@@ -167,7 +182,7 @@ export default function Music() {
             </span>
           </Reveal>
           <div className="music__grid music__grid--releases" role="list" aria-label={t("music.eps")}>
-            {eps.map((item, i) => (
+            {eps.slice(0, 3).map((item, i) => (
               <ReleaseCard
                 key={item.id}
                 item={item}
@@ -177,6 +192,17 @@ export default function Music() {
               />
             ))}
           </div>
+          {eps.length > 3 && (
+            <Reveal className="music__view-all" delay={1}>
+              <button
+                type="button"
+                className="btn btn--ghost music__view-all-btn"
+                onClick={() => setEpsModalOpen(true)}
+              >
+                {t("music.viewAll", { count: eps.length })}
+              </button>
+            </Reveal>
+          )}
         </div>
 
         <Reveal className="music__cta">
@@ -191,13 +217,34 @@ export default function Music() {
         </Reveal>
       </div>
 
+      {/* Sticky bottom player */}
       <MusicPlayer
         currentTrack={currentTrack}
         isOpen={playerOpen}
-        onClose={handleClose}
+        onClose={handleClosePlayer}
         onNext={handleNext}
         onPrev={handlePrev}
         tracks={allTracks}
+      />
+
+      {/* Singles modal */}
+      <ReleaseModal
+        title={t("music.singles")}
+        items={singles.map(s => ({ ...s, tracks: 1, type: "single" }))}
+        isOpen={singlesModalOpen}
+        onClose={() => setSinglesModalOpen(false)}
+        onPlay={handlePlay}
+        type="single"
+      />
+
+      {/* EPs modal */}
+      <ReleaseModal
+        title={t("music.eps")}
+        items={eps.map(e => ({ ...e, type: "ep" }))}
+        isOpen={epsModalOpen}
+        onClose={() => setEpsModalOpen(false)}
+        onPlay={handlePlay}
+        type="ep"
       />
     </section>
   );
