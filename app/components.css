@@ -3842,7 +3842,7 @@
   }
 }
 
-/* ================= MUSIC PLAYER (FLOATING) ================= */
+/* ================= MUSIC PLAYER (FLOATING WITH EMBED) ================= */
 .music-player {
   position: fixed;
   left: 50%;
@@ -3857,9 +3857,9 @@
 .music-player__inner {
   pointer-events: auto;
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 18px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
   border-radius: 16px;
   border: 1px solid rgba(111, 180, 206, 0.3);
   background: rgba(6, 10, 20, 0.95);
@@ -3870,12 +3870,51 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
+/* Spotify Embed wrapper */
+.music-player__embed-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #191919;
+}
+
+.music-player__iframe {
+  width: 100%;
+  height: 352px;
+  border: none;
+  border-radius: 12px;
+  background: #191919;
+  display: block;
+}
+
+.music-player__embed-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 10, 20, 0.95);
+  z-index: 10;
+  border-radius: 12px;
+}
+
+.music-player__spinner {
+  animation: spin 1s linear infinite;
+  color: var(--cyan);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Track info row */
 .music-player__track {
   display: flex;
   align-items: center;
   gap: 12px;
   min-width: 0;
-  flex: 1;
+  padding: 4px 4px 0;
 }
 
 .music-player__cover {
@@ -3912,18 +3951,20 @@
   text-overflow: ellipsis;
 }
 
+/* Controls */
 .music-player__controls {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 4px;
 }
 
 .music-player__btn {
   display: grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.05);
@@ -3950,39 +3991,19 @@
   cursor: not-allowed;
 }
 
-.music-player__btn--play {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, var(--cyan), var(--violet));
+.music-player__btn--spotify {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #1DB954, #1ed760);
   border-color: transparent;
-  color: #060a14;
-  box-shadow:
-    0 4px 16px rgba(111, 180, 206, 0.4),
-    0 0 0 3px rgba(111, 180, 206, 0.15);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.4);
 }
 
-.music-player__btn--play:hover:not(:disabled) {
-  background: linear-gradient(135deg, #56d6ff, #a279ff);
-  box-shadow:
-    0 6px 20px rgba(111, 180, 206, 0.55),
-    0 0 0 3px rgba(111, 180, 206, 0.2);
+.music-player__btn--spotify:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1ed760, #1DB954);
   border-color: transparent;
-}
-
-.music-player__spinner {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.music-player__progress {
-  display: none; /* Hidden in floating mode - decorative only */
-}
-
-.music-player__spotify-btn {
-  display: none; /* Hidden in floating mode - Play button opens Spotify */
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.55);
 }
 
 .music-player__close {
@@ -3997,7 +4018,7 @@
   cursor: pointer;
   transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
     background 0.25s var(--ease), transform 0.2s var(--ease);
-  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .music-player__close:hover {
@@ -4007,7 +4028,7 @@
   transform: rotate(90deg);
 }
 
-/* Mobile responsive for floating player */
+/* Mobile responsive */
 @media (max-width: 640px) {
   .music-player {
     bottom: 16px;
@@ -4018,14 +4039,18 @@
     width: auto;
   }
 
+  .music-player__iframe {
+    height: 300px;
+  }
+
   .music-player__inner {
-    padding: 12px 14px;
-    gap: 12px;
+    padding: 8px;
+    gap: 8px;
   }
 
   .music-player__cover {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
   }
 
   .music-player__title {
@@ -4037,20 +4062,16 @@
   }
 
   .music-player__btn {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
   }
 
-  .music-player__btn--play {
-    width: 38px;
-    height: 38px;
+  .music-player__btn--spotify {
+    width: 40px;
+    height: 40px;
   }
 
-  .music-player__close {
-    width: 32px;
-    height: 32px;
   }
-}
 
 /* ================= RELEASE MODAL (Ver más Singles/EPs) ================= */
 .release-modal__backdrop {
@@ -4063,6 +4084,8 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
+  height: 100vh;
+  width: 100vw;
 }
 
 .release-modal {
@@ -4082,7 +4105,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin: auto; /* centers vertically in flex container */
+  margin: auto;
 }
 
 .release-modal__header {

@@ -3,12 +3,8 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
-  Play,
-  Pause,
   SkipBack,
   SkipForward,
-  Volume2,
-  VolumeX,
   ExternalLink,
   X,
   Loader2,
@@ -16,15 +12,24 @@ import {
 import { useLang } from "@/lib/i18n";
 
 const STORAGE_KEY = "dune-moon-player-state";
+const embedUrl = (id) => `https://open.spotify.com/embed/album/${id}?utm_source=generator&theme=0`;
 
 export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onPrev, tracks }) {
   const { t } = useLang();
   const reduce = useReducedMotion();
   const playerRef = useRef(null);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [iframeSrc, setIframeSrc] = useState("");
+  const prevTrackRef = useRef(currentTrack);
+
+  // Update iframe src when track changes
+  useEffect(() => {
+    if (currentTrack && currentTrack !== prevTrackRef.current) {
+      prevTrackRef.current = currentTrack;
+      setIsLoading(true);
+      setIframeSrc(embedUrl(currentTrack.id));
+    }
+  }, [currentTrack]);
 
   // Persist current track
   useEffect(() => {
@@ -38,29 +43,11 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
     }
   }, [isOpen, currentTrack]);
 
-  // Restore last track on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        // Could restore track here if needed
-      }
-    } catch { /* ignore */ }
-  }, []);
-
   const handleOpenSpotify = useCallback(() => {
     if (currentTrack) {
       window.open(`https://open.spotify.com/album/${currentTrack.id}`, "_blank", "noopener,noreferrer");
     }
   }, [currentTrack]);
-
-  const handlePlayPause = useCallback(() => {
-    // Play button = open in Spotify for real playback
-    handleOpenSpotify();
-    setIsPlaying(true);
-    setTimeout(() => setIsPlaying(false), 1000); // Visual feedback
-  }, [handleOpenSpotify]);
 
   const handleNext = useCallback(() => {
     onNext();
@@ -72,17 +59,9 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === "Escape") onClose();
-    if (e.key === " ") { e.preventDefault(); handlePlayPause(); }
     if (e.key === "ArrowRight") handleNext();
     if (e.key === "ArrowLeft") handlePrev();
-  }, [onClose, handlePlayPause, handleNext, handlePrev]);
-
-  const formatTime = (sec) => {
-    if (!sec || isNaN(sec)) return "0:00";
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
-  };
+  }, [onClose, handleNext, handlePrev]);
 
   if (!isOpen || !currentTrack) return null;
 
@@ -99,6 +78,26 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
       onKeyDown={handleKeyDown}
     >
       <div className="music-player__inner">
+        {/* Spotify Embed iframe - main playback */}
+        <div className="music-player__embed-wrapper">
+          {isLoading && (
+            <div className="music-player__embed-loader">
+              <Loader2 className="music-player__spinner" size={32} aria-hidden="true" />
+            </div>
+          )}
+          <iframe
+            className="music-player__iframe"
+            src={iframeSrc}
+            title={`${currentTrack.name} en Spotify`}
+            width="100%"
+            height={352}
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            onLoad={() => setIsLoading(false)}
+          />
+        </div>
+
         <div className="music-player__track">
           <img
             src={`/covers/${currentTrack.id}.jpg`}
@@ -125,16 +124,11 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
           </button>
 
           <button
-            className="music-player__btn music-player__btn--play"
-            onClick={handlePlayPause}
-            aria-label={t("music.playInSpotify")}
-            disabled={isLoading}
+            className="music-player__btn music-player__btn--spotify"
+            onClick={handleOpenSpotify}
+            aria-label={t("music.openInSpotify")}
           >
-            {isLoading ? (
-              <Loader2 className="music-player__spinner" size={24} aria-hidden="true" />
-            ) : (
-              <Play size={24} aria-hidden="true" />
-            )}
+            <ExternalLink size={20} aria-hidden="true" />
           </button>
 
           <button
@@ -146,24 +140,6 @@ export default function MusicPlayer({ currentTrack, isOpen, onClose, onNext, onP
             <SkipForward size={20} aria-hidden="true" />
           </button>
         </div>
-
-        <div className="music-player__progress" role="slider" aria-label={t("music.seek")} aria-valuemin={0} aria-valuemax={100} aria-valuenow={0} tabIndex={0} aria-disabled={true}>
-          <div className="music-player__progress-bar" style={{ width: "0%" }} aria-hidden="true" />
-        </div>
-
-        <div className="music-player__time">
-          <span>0:00</span>
-          <span>--:--</span>
-        </div>
-
-        <button
-          className="music-player__spotify-btn"
-          onClick={handleOpenSpotify}
-          aria-label={t("music.openInSpotify")}
-        >
-          <ExternalLink size={16} aria-hidden="true" />
-          <span>{t("music.openInSpotify")}</span>
-        </button>
 
         <button
           className="music-player__close"
