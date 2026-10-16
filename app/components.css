@@ -4063,7 +4063,6 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  overflow-y: auto;
 }
 
 .release-modal {
@@ -4083,6 +4082,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin: auto; /* centers vertically in flex container */
 }
 
 .release-modal__header {
