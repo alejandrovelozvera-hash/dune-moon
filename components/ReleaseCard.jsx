@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Reveal from "./Reveal";
+import Equalizer from "./Equalizer";
 import { useLang } from "@/lib/i18n";
 
-export default function ReleaseCard({ item, index, isFeatured, onPlay }) {
+export default function ReleaseCard({ item, index, isFeatured, isActive, onPlay }) {
   const { t } = useLang();
   const [hovered, setHovered] = useState(false);
   const [showTracklist, setShowTracklist] = useState(false);
@@ -24,7 +25,7 @@ export default function ReleaseCard({ item, index, isFeatured, onPlay }) {
   return (
     <Reveal delay={(index % 6) + 1} className="release-card">
       <article
-        className={`release-card__inner${isFeatured ? " release-card--featured" : ""}${hovered ? " is-hovered" : ""}`}
+        className={`release-card__inner${isFeatured ? " release-card--featured" : ""}${isActive ? " is-active" : ""}${hovered ? " is-hovered" : ""}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={handleClick}
@@ -32,6 +33,7 @@ export default function ReleaseCard({ item, index, isFeatured, onPlay }) {
         role="button"
         tabIndex={0}
         aria-label={t("music.openPlayer", { name: item.name })}
+        aria-current={isActive ? "true" : undefined}
       >
         <div className="release-card__cover-wrapper">
           <img
@@ -42,6 +44,11 @@ export default function ReleaseCard({ item, index, isFeatured, onPlay }) {
             loading="lazy"
             className="release-card__cover"
           />
+          {isActive && (
+            <span className="release-card__playing" aria-hidden="true">
+              <Equalizer bars={4} colors={["var(--cyan)"]} />
+            </span>
+          )}
           <div className="release-card__overlay" aria-hidden="true">
             <button
               className="release-card__play-btn"

@@ -152,9 +152,10 @@ export default function Music() {
             {singles.map((item, i) => (
               <ReleaseCard
                 key={item.id}
-                item={{ ...item, tracks: 1 }}
+                item={{ ...item, tracks: 1, type: "single" }}
                 index={i}
                 isFeatured={item.id === FEATURED_ID}
+                isActive={playerOpen && currentTrack?.id === item.id}
                 onPlay={handlePlay}
               />
             ))}
@@ -173,9 +174,10 @@ export default function Music() {
             {eps.slice(0, 3).map((item, i) => (
               <ReleaseCard
                 key={item.id}
-                item={item}
+                item={{ ...item, type: "ep" }}
                 index={i}
                 isFeatured={false}
+                isActive={playerOpen && currentTrack?.id === item.id}
                 onPlay={handlePlay}
               />
             ))}
